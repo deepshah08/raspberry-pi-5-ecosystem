@@ -1,0 +1,42 @@
+{
+  "project_name": "Raspberry Pi 5 Ecosystem Swarm",
+  "repository": "deepshah08/raspberry-pi-5-ecosystem",
+  "max_concurrent_sessions": 5,
+  "total_planned_sessions": 100,
+  "models": {
+    "planning": "Gemini 3.6 Flash (High)",
+    "implementation": "Gemini 3.6 Flash (Low)"
+  },
+  "clusters": [
+    {
+      "id": "cluster_1",
+      "name": "Knowledge & RAG (Project 1)",
+      "projects": ["01-offline-tutor", "02-second-brain", "03-whisper-indexer"],
+      "nas_path": "/mnt/nas/kb_archives"
+    },
+    {
+      "id": "cluster_2",
+      "name": "Media & Automation",
+      "projects": ["04-immich", "05-jellyfin", "06-voice-clone"],
+      "nas_path": "/mnt/nas/media_vault"
+    },
+    {
+      "id": "cluster_3",
+      "name": "Backup & Storage Pipeline",
+      "projects": ["07-backup-engine", "08-trip-drop", "09-stirling-pdf"],
+      "nas_path": "/mnt/nas/photos_staging"
+    },
+    {
+      "id": "cluster_4",
+      "name": "System & Security",
+      "projects": ["10-intrusion-monitor", "11-deadmans-switch", "12-pihole", "13-n8n"],
+      "nas_path": "/mnt/nas/system_logs"
+    },
+    {
+      "id": "cluster_5",
+      "name": "Intelligence & Analytics",
+      "projects": ["14-market-sentiment", "15-financial-pipeline", "16-morning-briefing"],
+      "nas_path": "/mnt/nas/ai_models"
+    }
+  ]
+}
