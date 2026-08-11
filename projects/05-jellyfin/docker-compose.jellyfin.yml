@@ -1,0 +1,20 @@
+version: '3.8'
+services:
+  jellyfin:
+    image: lscr.io/linuxserver/jellyfin:latest
+    container_name: jellyfin
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
+    volumes:
+      - ./config:/config
+      - /mnt/nas/media_vault:/data/media
+    devices:
+      - /dev/dri:/dev/dri
+      - /dev/video10:/dev/video10
+      - /dev/video11:/dev/video11
+      - /dev/video12:/dev/video12
+    ports:
+      - 8096:8096
+    restart: unless-stopped
