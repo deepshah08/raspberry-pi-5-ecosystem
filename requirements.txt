@@ -1,0 +1,44 @@
+# Root requirements.txt for raspberry-pi-5-ecosystem
+# Covers all project dependencies for CI test collection
+
+# Testing
+pytest>=7.4.0
+flake8>=6.0.0
+
+# Web frameworks
+fastapi>=0.104.0
+uvicorn>=0.24.0
+httpx>=0.25.0
+python-multipart>=0.0.6
+
+# Graph / Data
+networkx>=3.2
+
+# Vector DB / RAG
+chromadb>=0.4.0
+pypdf>=3.17.0
+
+# Audio / ML
+# faster-whisper>=0.9.0  # commented out - too heavy for CI, uses system libs
+
+# Finance
+yfinance>=0.2.31
+pandas>=2.1.0
+
+# Sentiment
+vaderSentiment>=3.3.2
+
+# Network discovery
+zeroconf>=0.131.0
+
+# Scheduling
+apscheduler>=3.10.0
+
+# HTTP requests
+requests>=2.31.0
+
+# Backup / sync utils
+watchdog>=3.0.0
+
+# Portfolio
+numpy>=1.26.0
