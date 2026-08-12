@@ -1,0 +1,102 @@
+[
+  {
+    "name": "Hindi Audio",
+    "includeCustomFormatWhenRenaming": false,
+    "specifications": [
+      {
+        "name": "Hindi Audio",
+        "implementation": "ReleaseTitleSpecification",
+        "implementationName": "Release Title",
+        "infoLink": "",
+        "negate": false,
+        "required": false,
+        "fields": [
+          {
+            "name": "value",
+            "value": "(?i)\\bHindi\\b"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Dual Audio",
+    "includeCustomFormatWhenRenaming": false,
+    "specifications": [
+      {
+        "name": "Dual Audio",
+        "implementation": "ReleaseTitleSpecification",
+        "implementationName": "Release Title",
+        "infoLink": "",
+        "negate": false,
+        "required": false,
+        "fields": [
+          {
+            "name": "value",
+            "value": "(?i)(Dual.Audio|Dual-Audio|DualAudio|\\[Dual\\])"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Hindi Dubbed",
+    "includeCustomFormatWhenRenaming": false,
+    "specifications": [
+      {
+        "name": "Hindi Dubbed",
+        "implementation": "ReleaseTitleSpecification",
+        "implementationName": "Release Title",
+        "infoLink": "",
+        "negate": false,
+        "required": false,
+        "fields": [
+          {
+            "name": "value",
+            "value": "(?i)(Hindi.Dubbed|Hindi-Dubbed|HindiDubbed)"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "English Audio",
+    "includeCustomFormatWhenRenaming": false,
+    "specifications": [
+      {
+        "name": "English Audio",
+        "implementation": "ReleaseTitleSpecification",
+        "implementationName": "Release Title",
+        "infoLink": "",
+        "negate": false,
+        "required": false,
+        "fields": [
+          {
+            "name": "value",
+            "value": "(?i)\\bEnglish\\b"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Non EN-HI Audio",
+    "includeCustomFormatWhenRenaming": false,
+    "specifications": [
+      {
+        "name": "Non EN-HI Audio",
+        "implementation": "ReleaseTitleSpecification",
+        "implementationName": "Release Title",
+        "infoLink": "",
+        "negate": false,
+        "required": false,
+        "fields": [
+          {
+            "name": "value",
+            "value": "(?i)(\\bTamil\\b|\\bTelugu\\b|\\bKannada\\b|\\bMalayalam\\b|\\bMarathi\\b|\\bPunjabi\\b|\\bBengali\\b)"
+          }
+        ]
+      }
+    ]
+  }
+]
