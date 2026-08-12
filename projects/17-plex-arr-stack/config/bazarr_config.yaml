@@ -1,0 +1,55 @@
+general:
+  # Bind address (0.0.0.0 binds to all interfaces)
+  ip: 0.0.0.0
+  # Port for the Bazarr web interface
+  port: 6767
+  # Base URL, typically empty unless behind a reverse proxy using a subpath
+  base_url: ''
+  # Whether to only download a single language
+  single_language: false
+  # Enable integration with Sonarr
+  use_sonarr: true
+  # Enable integration with Radarr
+  use_radarr: true
+  
+  # Sonarr connection details (to be filled after deployment)
+  sonarr_ip: localhost
+  sonarr_port: 8989
+  sonarr_apikey: ''  # Fill with your Sonarr API key
+  
+  # Radarr connection details
+  radarr_ip: localhost
+  radarr_port: 7878
+  radarr_apikey: ''  # Fill with your Radarr API key
+  
+subtitles:
+  # Default subtitle language for series (ONLY English)
+  serie_default_language:
+    - en
+  # Disable hearing impaired subtitles for series
+  serie_default_hi: false
+  
+  # Default subtitle language for movies (ONLY English)
+  movie_default_language:
+    - en
+  # Disable hearing impaired subtitles for movies
+  movie_default_hi: false
+  
+  # Auto-sync subtitles to video using ffsubsync
+  use_postprocessing: true
+  # Command for post-processing with ffsubsync
+  postprocessing_cmd: 'ffsubsync "{video}" -i "{subtitle}" -o "{subtitle}"'
+
+providers:
+  # OpenSubtitles provider configuration (free tier: 20 downloads/day)
+  - name: opensubtitles
+    enabled: true
+  # Subscene provider configuration (free)
+  - name: subscene  
+    enabled: true
+  # YIFY Subtitles provider configuration (good for movies)
+  - name: yifysubtitles
+    enabled: true
+  # OpenSubtitles.com provider configuration (newer API, separate from opensubtitles.org)
+  - name: opensubtitlescom
+    enabled: true
