@@ -54,8 +54,7 @@ def main():
             all_passed = False
         print(f"{service:<15} | {port:<6} | {status}")
     
-    print("
-Paths Check:")
+    print("\nPaths Check:")
     for path in paths:
         exists = check_path(path)
         status = "✅" if exists else "❌"
@@ -63,8 +62,7 @@ Paths Check:")
             all_passed = False
         print(f"{path:<30} | {status}")
         
-    print("
-Docker Check:")
+    print("\nDocker Check:")
     docker_running = check_docker()
     status = "✅" if docker_running else "❌"
     if not docker_running:
@@ -72,13 +70,23 @@ Docker Check:")
     print(f"{'docker ps':<30} | {status}")
     
     if all_passed:
-        print("
-All checks passed! ✅")
+        print("\nAll checks passed! ✅")
         sys.exit(0)
     else:
-        print("
-Some checks failed! ❌")
+        print("\nSome checks failed! ❌")
         sys.exit(1)
 
 if __name__ == "__main__":
     main()
+
+
+def all_pass():
+    services = {"Plex": 32400, "Radarr": 7878, "Sonarr": 8989, "Prowlarr": 9696, "qBittorrent": 8080, "Bazarr": 6767, "Overseerr": 5055, "Tautulli": 8181}
+    paths = ["/mnt/nas/media", "/mnt/nas/configs"]
+    for service, port in services.items():
+        if not check_port("localhost", port):
+            return False
+    for path in paths:
+        if not check_path(path):
+            return False
+    return True
