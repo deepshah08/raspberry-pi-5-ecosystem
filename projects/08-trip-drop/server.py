@@ -1,1 +1,106 @@
-aW1wb3J0IGFzeW5jaW8KaW1wb3J0IG9zCmltcG9ydCBzb2NrZXQKZnJvbSBjb250ZXh0bGliIGltcG9ydCBhc3luY2NvbnRleHRtYW5hZ2VyCmZyb20gdHlwaW5nIGltcG9ydCBMaXN0Cgpmcm9tIGZhc3RhcGkgaW1wb3J0IEZhc3RBUEksIFJlcXVlc3QsIEhUVFBFeGNlcHRpb24KZnJvbSBmYXN0YXBpLnJlc3BvbnNlcyBpbXBvcnQgSlNPTlJlc3BvbnNlCmZyb20gemVyb2NvbmYgaW1wb3J0IFNlcnZpY2VCcm93c2VyLCBTZXJ2aWNlSW5mbywgWmVyb2NvbmYKClNFUlZJQ0VfVFlQRSA9ICJfdHJpcGRyb3AuX3RjcC5sb2NhbC4iClBPUlQgPSA4MDAwCkhPU1ROQU1FID0gc29ja2V0LmdldGhvc3RuYW1lKCkKCmNsYXNzIFBlZXJMaXN0ZW5lcjoKICAgIGRlZiBfX2luaXRfXyhzZWxmKToKICAgICAgICBzZWxmLnBlZXJzID0ge30KCiAgICBkZWYgcmVtb3ZlX3NlcnZpY2Uoc2VsZiwgemVyb2NvbmYsIHR5cGUsIG5hbWUpOgogICAgICAgIGlmIG5hbWUgaW4gc2VsZi5wZWVyczoKICAgICAgICAgICAgZGVsIHNlbGYucGVlcnNbbmFtZV0KCiAgICBkZWYgYWRkX3NlcnZpY2Uoc2VsZiwgemVyb2NvbmYsIHR5cGUsIG5hbWUpOgogICAgICAgIGluZm8gPSB6ZXJvY29uZi5nZXRfc2VydmljZV9pbmZvKHR5cGUsIG5hbWUpCiAgICAgICAgaWYgaW5mbzoKICAgICAgICAgICAgYWRkcmVzc2VzID0gW3NvY2tldC5pbmV0X250b2EoYWRkcikgZm9yIGFkZHIgaW4gaW5mby5hZGRyZXNzZXNdCiAgICAgICAgICAgIHNlbGYucGVlcnNbbmFtZV0gPSB7CiAgICAgICAgICAgICAgICAiYWRkcmVzc2VzIjogYWRkcmVzc2VzLAogICAgICAgICAgICAgICAgInBvcnQiOiBpbmZvLnBvcnQsCiAgICAgICAgICAgICAgICAic2VydmVyIjogaW5mby5zZXJ2ZXIsCiAgICAgICAgICAgIH0KCiAgICBkZWYgdXBkYXRlX3NlcnZpY2Uoc2VsZiwgemVyb2NvbmYsIHR5cGUsIG5hbWUpOgogICAgICAgIHNlbGYuYWRkX3NlcnZpY2UoemVyb2NvbmYsIHR5cGUsIG5hbWUpCgp6ZXJvY29uZjogWmVyb2NvbmYgPSBOb25lCmxpc3RlbmVyOiBQZWVyTGlzdGVuZXIgPSBOb25lCnNlcnZpY2VfaW5mbzogU2VydmljZUluZm8gPSBOb25lCgpAYXN5bmNjb250ZXh0bWFuYWdlcgphc3luYyBkZWYgbGlmZXNwYW4oYXBwOiBGYXN0QVBJKToKICAgIGdsb2JhbCB6ZXJvY29uZiwgbGlzdGVuZXIsIHNlcnZpY2VfaW5mbwoKICAgIG9zLm1ha2VkaXJzKCJ1cGxvYWRzIiwgZXhpc3Rfb2s9VHJ1ZSkKCiAgICBpZiBvcy5lbnZpcm9uLmdldCgiVEVTVElORyIpICE9ICIxIjoKICAgICAgICB6ZXJvY29uZiA9IFplcm9jb25mKCkKICAgICAgICBsaXN0ZW5lciA9IFBlZXJMaXN0ZW5lcigpCiAgICAgICAgYnJvd3NlciA9IFNlcnZpY2VCcm93c2VyKHplcm9jb25mLCBTRVJWSUNFX1RZUEUsIGxpc3RlbmVyKQoKICAgICAgICBpcF9hZGRyZXNzID0gc29ja2V0LmdldGhvc3RieW5hbWUoc29ja2V0LmdldGhvc3RuYW1lKCkpCiAgICAgICAgaWYgaXBfYWRkcmVzcyA9PSAnMTI3LjAuMC4xJzoKICAgICAgICAgICAgcyA9IHNvY2tldC5zb2NrZXQoc29ja2V0LkFGX0lORVQsIHNvY2tldC5TT0NLX0RHUkFNKQogICAgICAgICAgICB0cnk6CiAgICAgICAgICAgICAgICBzLmNvbm5lY3QoKCcxMC4yNTUuMjU1LjI1NScsIDEpKQogICAgICAgICAgICAgICAgaXBfYWRkcmVzcyA9IHMuZ2V0c29ja25hbWUoKVswXQogICAgICAgICAgICBleGNlcHQgRXhjZXB0aW9uOgogICAgICAgICAgICAgICAgaXBfYWRkcmVzcyA9ICcxMjcuMC4wLjEnCiAgICAgICAgICAgIGZpbmFsbHk6CiAgICAgICAgICAgICAgICBzLmNsb3NlKCkKCiAgICAgICAgYWRkcmVzc2VzID0gW3NvY2tldC5pbmV0X2F0b24oaXBfYWRkcmVzcyldCiAgICAgICAgc2VydmljZV9pbmZvID0gU2VydmljZUluZm8oCiAgICAgICAgICAgIFNFUlZJQ0VfVFlQRSwKICAgICAgICAgICAgZiJ7SE9TVE5BTUV9Ll90cmlwZHJvcC5fdGNwLmxvY2FsLiIsCiAgICAgICAgICAgIGFkZHJlc3Nlcz1hZGRyZXNzZXMsCiAgICAgICAgICAgIHBvcnQ9UE9SVCwKICAgICAgICAgICAgc2VydmVyPWYie0hPU1ROQU1FfS5sb2NhbC4iLAogICAgICAgICkKICAgICAgICB6ZXJvY29uZi5yZWdpc3Rlcl9zZXJ2aWNlKHNlcnZpY2VfaW5mbykKICAgIGVsc2U6CiAgICAgICAgbGlzdGVuZXIgPSBQZWVyTGlzdGVuZXIoKQogICAgICAgIGxpc3RlbmVyLnBlZXJzID0geyJ0ZXN0X3BlZXIiOiB7ImFkZHJlc3NlcyI6IFsiMTI3LjAuMC4xIl0sICJwb3J0IjogODAwMCwgInNlcnZlciI6ICJ0ZXN0LmxvY2FsLiJ9fQoKICAgIHlpZWxkCgogICAgaWYgemVyb2NvbmYgYW5kIHNlcnZpY2VfaW5mbyBhbmQgb3MuZW52aXJvbi5nZXQoIlRFU1RJTkciKSAhPSAiMSI6CiAgICAgICAgemVyb2NvbmYudW5yZWdpc3Rlcl9zZXJ2aWNlKHNlcnZpY2VfaW5mbykKICAgICAgICB6ZXJvY29uZi5jbG9zZSgpCgphcHAgPSBGYXN0QVBJKGXXX1liXXNwYW49bGlmZXNwYW4pCgpAYXBwLnBvc3QoIi91cGxvYWQve2ZpbGVuYW1lOnBhdGh9IikKYXN5bmMgZGVmIHVwbG9hZF9maWxlKGZpbGVuYW1lOiBzdHIsIHJlcXVlc3Q6IFJlcXVlc3QpOgogICAgIiIiSGFuZGxlIGNodW5rZWQgdXBsb2FkIG9mIGEgZmlsZSIiIgogICAgZmlsZV9wYXRoID0gb3MucGF0aC5qb2luKCJ1cGxvYWRzIiwgZmlsZW5hbWUpCiAgICBpZiBvcy5wYXRoLmRpcm5hbWUoZmlsZV9wYXRoKSAhPSAidXBsb2FkcyI6CiAgICAgICAgcmFpc2UgSFRUUEV4Y2VwdGlvbihzdGF0dXNfY29kZT00MDAsIGRldGFpbD0iSW52YWxpZCBmaWxlbmFtZSIpCiAgICB0cnk6CiAgICAgICAgd2l0aCBvcGVuKGZpbGVfcGF0aCwgIndiIikgYXMgZjoKICAgICAgICAgICAgYXN5bmMgZm9yIGNodW5rIGluIHJlcXVlc3Quc3RyZWFtKCk6CiAgICAgICAgICAgICAgICBmLndyaXRlKGNodW5rKQogICAgICAgIHJldHVybiB7InN0YXR1cyI6ICJzdWNjZXNzIiwgImZpbGVuYW1lIjogZmlsZW5hbWV9CiAgICBleGNlcHQgRXhjZXB0aW9uIGFzIGU6CiAgICAgICAgcmFpc2UgSFRUUEV4Y2VwdGlvbihzdGF0dXNfY29kZT01MDAsIGRldGFpbD1zdHIoZSkpCgpAYXBwLmdldCgiL3BlZXJzIikKYXN5bmMgZGVmIGdldF9wZWVycygpOgogICAgIiIiUmV0dXJuIGEgbGlzdCBvZiBkaXNjb3ZlcmVkIHBlZXJzIiIiCiAgICBpZiBsaXN0ZW5lcjoKICAgICAgICByZXR1cm4geyJwZWVycyI6IGxpc3RlbmVyLnBlZXJzfQogICAgcmV0dXJuIHsicGVlcnMiOiB7fX0KCmlmIF9fbmFtZV9fID09ICJfX21haW5fXyI6CiAgICBpbXBvcnQgdXZpY29ybgogICAgdXZpY29ybi5ydW4oYXBwLCBob3N0PSIwLjAuMC4wIiwgcG9ydD1QT1JUKQo=
+import asyncio
+import os
+import socket
+from contextlib import asynccontextmanager
+from typing import List
+
+from fastapi import FastAPI, Request, HTTPException
+from fastapi.responses import JSONResponse
+from zeroconf import ServiceBrowser, ServiceInfo, Zeroconf
+
+SERVICE_TYPE = "_tripdrop._tcp.local."
+PORT = 8000
+HOSTNAME = socket.gethostname()
+
+class PeerListener:
+    def __init__(self):
+        self.peers = {}
+
+    def remove_service(self, zeroconf, type, name):
+        if name in self.peers:
+            del self.peers[name]
+
+    def add_service(self, zeroconf, type, name):
+        info = zeroconf.get_service_info(type, name)
+        if info:
+            addresses = [socket.inet_ntoa(addr) for addr in info.addresses]
+            self.peers[name] = {
+                "addresses": addresses,
+                "port": info.port,
+                "server": info.server,
+            }
+
+    def update_service(self, zeroconf, type, name):
+        self.add_service(zeroconf, type, name)
+
+zeroconf: Zeroconf = None
+listener: PeerListener = None
+service_info: ServiceInfo = None
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    global zeroconf, listener, service_info
+
+    os.makedirs("uploads", exist_ok=True)
+
+    if os.environ.get("TESTING") != "1":
+        zeroconf = Zeroconf()
+        listener = PeerListener()
+        browser = ServiceBrowser(zeroconf, SERVICE_TYPE, listener)
+
+        ip_address = socket.gethostbyname(socket.gethostname())
+        if ip_address == '127.0.0.1':
+            s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+            try:
+                s.connect(('10.255.255.255', 1))
+                ip_address = s.getsockname()[0]
+            except Exception:
+                ip_address = '127.0.0.1'
+            finally:
+                s.close()
+
+        addresses = [socket.inet_aton(ip_address)]
+        service_info = ServiceInfo(
+            SERVICE_TYPE,
+            f"{HOSTNAME}._tripdrop._tcp.local.",
+            addresses=addresses,
+            port=PORT,
+            server=f"{HOSTNAME}.local.",
+        )
+        zeroconf.register_service(service_info)
+    else:
+        listener = PeerListener()
+        listener.peers = {"test_peer": {"addresses": ["127.0.0.1"], "port": 8000, "server": "test.local."}}
+
+    yield
+
+    if zeroconf and service_info and os.environ.get("TESTING") != "1":
+        zeroconf.unregister_service(service_info)
+        zeroconf.close()
+
+app = FastAPI(lifespan=lifespan)
+
+@app.post("/upload/{filename:path}")
+async def upload_file(filename: str, request: Request):
+    """Handle chunked upload of a file"""
+    file_path = os.path.join("uploads", filename)
+    if os.path.dirname(file_path) != "uploads":
+        raise HTTPException(status_code=400, detail="Invalid filename")
+    try:
+        with open(file_path, "wb") as f:
+            async for chunk in request.stream():
+                f.write(chunk)
+        return {"status": "success", "filename": filename}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.get("/peers")
+async def get_peers():
+    """Return a list of discovered peers"""
+    if listener:
+        return {"peers": listener.peers}
+    return {"peers": {}}
+
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run(app, host="0.0.0.0", port=PORT)
