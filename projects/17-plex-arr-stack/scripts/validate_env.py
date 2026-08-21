@@ -33,8 +33,7 @@ def main():
     script_dir = Path(__file__).resolve().parent
     env_file = script_dir.parent / '.env'
     
-    print(f"Validating {env_file}...
-")
+    print(f"Validating {env_file}...\n")
     
     if not env_file.exists():
         print(f"❌ .env file not found at {env_file}")
@@ -65,8 +64,7 @@ def main():
             print(f"❌ {var} is missing or empty")
             all_passed = False
             
-    print("
-Checking directories:")
+    print("\nChecking directories:")
     media_path = env_vars.get("MEDIA_PATH")
     if media_path:
         if os.path.isdir(media_path):
@@ -83,8 +81,7 @@ Checking directories:")
             print(f"❌ CONFIG_PATH ({config_path}) does not exist")
             all_passed = False
             
-    print("
-Validation Result:")
+    print("\nValidation Result:")
     if all_passed:
         print("✅ All checks passed!")
         sys.exit(0)
