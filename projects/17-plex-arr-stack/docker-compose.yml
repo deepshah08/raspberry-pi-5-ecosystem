@@ -15,9 +15,6 @@ services:
       - ${MEDIA_PATH}/tv:/tv
     devices:
       - /dev/dri:/dev/dri
-      - /dev/video10:/dev/video10
-      - /dev/video11:/dev/video11
-      - /dev/video12:/dev/video12
     restart: unless-stopped
 
   gluetun:
@@ -44,7 +41,6 @@ services:
   qbittorrent:
     image: lscr.io/linuxserver/qbittorrent:latest
     container_name: qbittorrent
-    network_mode: 'service:gluetun'
     environment:
       - PUID=${PUID}
       - PGID=${PGID}
@@ -53,8 +49,10 @@ services:
     volumes:
       - ${CONFIG_PATH}/qbittorrent:/config
       - ${MEDIA_PATH}:/data
-    depends_on:
-      - gluetun
+    ports:
+      - 8080:8080
+    networks:
+      - media_net
     restart: unless-stopped
 
   prowlarr:
@@ -88,7 +86,6 @@ services:
       - media_net
     depends_on:
       - prowlarr
-      - gluetun
     restart: unless-stopped
 
   sonarr:
@@ -107,7 +104,6 @@ services:
       - media_net
     depends_on:
       - prowlarr
-      - gluetun
     restart: unless-stopped
 
   bazarr:

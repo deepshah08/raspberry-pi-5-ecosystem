@@ -3,6 +3,7 @@
 
 # Testing
 pytest>=7.4.0
+pytest-timeout>=2.2.0
 flake8>=6.0.0
 
 # Web frameworks

@@ -27,15 +27,23 @@ def test_docker_compose_yml():
     for srv in expected_services:
         assert srv in services, f"Service {srv} missing"
         
-    # Test: qbittorrent has network_mode: 'service:gluetun'
-    assert services['qbittorrent'].get('network_mode') == 'service:gluetun'
+    # Test: qbittorrent has ports and networks configured correctly
+    assert '8080:8080' in services['qbittorrent'].get('ports', [])
+    assert 'media_net' in services['qbittorrent'].get('networks', [])
     
     # Test: plex has network_mode: host
     assert services['plex'].get('network_mode') == 'host'
     
+    # Test: plex has correct devices
+    assert services['plex'].get('devices') == ['/dev/dri:/dev/dri']
+
     # Test: gluetun has NET_ADMIN cap_add
     assert 'NET_ADMIN' in services['gluetun'].get('cap_add', [])
     
+    # Test: radarr and sonarr do not depend on gluetun
+    for srv in ['radarr', 'sonarr']:
+        assert 'gluetun' not in services[srv].get('depends_on', [])
+
     # Test: radarr/sonarr/bazarr/qbittorrent volumes include /data
     for srv in ['radarr', 'sonarr', 'bazarr', 'qbittorrent']:
         volumes = services[srv].get('volumes', [])
