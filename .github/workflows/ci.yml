@@ -12,15 +12,15 @@ jobs:
     env:
       PYTHONPATH: ${{ github.workspace }}
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
 
     - name: Set up Python 3.11
-      uses: actions/setup-python@v4
+      uses: actions/setup-python@v5
       with:
         python-version: '3.11'
 
     - name: Cache pip
-      uses: actions/cache@v3
+      uses: actions/cache@v4
       with:
         path: ~/.cache/pip
         key: ${{ runner.os }}-pip-${{ hashFiles('requirements.txt') }}
@@ -45,7 +45,7 @@ jobs:
       env:
         TESTING: "1"
       run: |
-        pytest projects/ scripts/ \
+        pytest projects/ scripts/ tests/ \
           --ignore=projects/06-voice-clone \
           --ignore=projects/03-whisper-indexer \
           -v \

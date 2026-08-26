@@ -8,7 +8,9 @@ sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../s
 import validate_stack
 
 def test_validate_stack_all_pass(capsys):
-    with mock.patch("validate_stack.socket.socket") as mock_socket,          mock.patch("validate_stack.os.path.exists") as mock_exists,          mock.patch("validate_stack.subprocess.run") as mock_run:
+    with mock.patch("validate_stack.socket.socket") as mock_socket, \
+         mock.patch("validate_stack.os.path.exists") as mock_exists, \
+         mock.patch("validate_stack.subprocess.run") as mock_run:
         
         # Mock port check to return 0 (success)
         mock_socket_instance = mock_socket.return_value.__enter__.return_value
@@ -31,7 +33,9 @@ def test_validate_stack_all_pass(capsys):
         assert "Plex            | 32400  | ✅" in captured.out
 
 def test_validate_stack_one_fail(capsys):
-    with mock.patch("validate_stack.socket.socket") as mock_socket,          mock.patch("validate_stack.os.path.exists") as mock_exists,          mock.patch("validate_stack.subprocess.run") as mock_run:
+    with mock.patch("validate_stack.socket.socket") as mock_socket, \
+         mock.patch("validate_stack.os.path.exists") as mock_exists, \
+         mock.patch("validate_stack.subprocess.run") as mock_run:
         
         # Mock port check - make one fail
         mock_socket_instance = mock_socket.return_value.__enter__.return_value
@@ -64,10 +68,8 @@ def test_env_template():
     if os.path.exists(env_template_path):
         with open(env_template_path, 'r') as f:
             content = f.read()
-            # Just some common variables that might be expected
             assert 'PUID' in content or 'PGID' in content or 'TZ' in content
     else:
-        # If it doesn't exist, we skip or mock a passing check since it depends on project setup
         pass
 
 def test_init_nas_dirs_script():

@@ -1,5 +1,10 @@
 import unittest
+import os
+import sys
 from pathlib import Path
+
+# Add project directory to path
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from config import NAS_BINDINGS
 from validate_config import validate
 
