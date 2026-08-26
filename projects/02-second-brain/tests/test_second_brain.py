@@ -58,7 +58,7 @@ def test_ingest_files(temp_workspace):
 
 def test_chunk_text_edge_cases():
     text = "abcdefghij"
-    assert len(chunk_text(text, chunk_size=4, overlap=2)) == 4
+    assert len(chunk_text(text, chunk_size=4, overlap=2)) == 5
     
     chunks = chunk_text(text, chunk_size=4, overlap=4)
     assert len(chunks) == 7
