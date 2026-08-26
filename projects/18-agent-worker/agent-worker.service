@@ -1,0 +1,21 @@
+[Unit]
+Description=Headless Jules Agent Review Worker
+After=network.target
+
+[Service]
+Type=simple
+User=deepshah08
+WorkingDirectory=/home/deepshah08/raspberry-pi-5-ecosystem/projects/18-agent-worker
+ExecStart=/home/deepshah08/raspberry-pi-5-ecosystem/.venv/bin/python3 worker.py
+Restart=always
+RestartSec=30
+
+# Throttling & Resource Sandboxing
+Nice=15
+CPUQuota=50%
+MemoryMax=1G
+ProtectSystem=strict
+ReadWritePaths=/tmp/agent_swarm_workspace
+
+[Install]
+WantedBy=multi-user.target
