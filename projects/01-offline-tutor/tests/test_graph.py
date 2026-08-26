@@ -1,5 +1,10 @@
 import json
 import unittest
+import os
+import sys
+
+# Add project directory to path
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from graph_engine import GraphEngine
 
 class TestGraphEngine(unittest.TestCase):
