@@ -28,12 +28,18 @@ def read_text(file_path):
         return ""
 
 def chunk_text(text, chunk_size=1000, overlap=200):
+    if not text:
+        return []
+    if len(text) <= chunk_size:
+        return [text]
+    step = max(1, chunk_size - overlap) if overlap < chunk_size else 1
     chunks = []
     start = 0
-    step = max(1, chunk_size - overlap)
     while start < len(text):
-        end = start + chunk_size
-        chunks.append(text[start:end])
+        if start + chunk_size >= len(text):
+            chunks.append(text[start:])
+            break
+        chunks.append(text[start:start + chunk_size])
         start += step
     return chunks
 
@@ -75,7 +81,6 @@ def ingest_directory(directory_path, db_path="./chroma_db", collection_name="sec
                 ids.append(chunk_id)
                 
     if documents:
-        # Add in batches to avoid large payloads if many files
         batch_size = 5000
         for i in range(0, len(documents), batch_size):
             collection.add(

@@ -1,0 +1,13 @@
+services:
+  stirling-pdf:
+    image: stirlingtools/stirling-pdf:latest
+    container_name: stirling-pdf
+    ports:
+      - "8083:8080"
+    volumes:
+      - ./stirling-data:/configs
+      - ./trainingData:/usr/share/tessdata
+      - ./logs:/logs
+    restart: unless-stopped
+    environment:
+      - DOCKER_ENABLE_SECURITY=false

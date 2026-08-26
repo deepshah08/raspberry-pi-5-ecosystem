@@ -1,1 +1,50 @@
-aW1wb3J0IGNzdgppbXBvcnQgaW8KZnJvbSBjb2xsZWN0aW9ucyBpbXBvcnQgZGVmYXVsdGRpY3QKCmNsYXNzIFBvcnRmb2xpb1RyYWNrZXI6CiAgICBkZWYgX19pbml0X18oc2VsZik6CiAgICAgICAgc2VsZi5ob2xkaW5ncyA9IGRlZmF1bHRkaWN0KGZsb2F0KQoKICAgIGRlZiBpbmdlc3RfdHJhbnNhY3Rpb25zKHNlbGYsIGZpbGVfY29udGVudDogc3RyKToKICAgICAgICAiIiIKICAgICAgICBJbmdlc3QgdHJhbnNhY3Rpb25zIGZyb20gYSBDU1YgZmlsZSBjb250ZW50LgogICAgICAgIEV4cGVjdGVkIGhlYWRlcnM6IGRhdGUsIHR5cGUsIHN5bWJvbCwgc2hhcmVzLCBwcmljZQogICAgICAgICIiIgogICAgICAgIHJlYWRlciA9IGNzdi5EaWN0UmVhZGVyKGlvLlN0cmluZ0lPKGZpbGVfY29udGVudCkpCiAgICAgICAgZm9yIHJvdyBpbiByZWFkZXI6CiAgICAgICAgICAgIGlmIG5vdCByb3c6CiAgICAgICAgICAgICAgICBjb250aW51ZQogICAgICAgICAgICBzeW1ib2wgPSByb3cuZ2V0KCJzeW1ib2wiLCAiIikuc3RyaXAoKS51cHBlcigpCiAgICAgICAgICAgIGlmIG5vdCBzeW1ib2w6CiAgICAgICAgICAgICAgICBjb250aW51ZQogICAgICAgICAgICB0cnk6CiAgICAgICAgICAgICAgICBzaGFyZXMgPSBmbG9hdChyb3cuZ2V0KCJzaGFyZXMiLCAwKSkKICAgICAgICAgICAgZXhjZXB0IFZhbHVlRXJyb3I6CiAgICAgICAgICAgICAgICBzaGFyZXMgPSAwLjAKICAgICAgICAgICAgdHhfdHlwZSA9IHJvdy5nZXQoInR5cGUiLCAiIikuc3RyaXAoKS51cHBlcigpCiAgICAgICAgICAgIGlmIHR4X3R5cGUgPT0gIkJVWSI6CiAgICAgICAgICAgICAgICBzZWxmLmhvbGRpbmdzW3N5bWJvbF0gKz0gc2hhcmVzCiAgICAgICAgICAgIGVsaWYgdHhfdHlwZSA9PSAiU0VMTCI6CiAgICAgICAgICAgICAgICBzZWxmLmhvbGRpbmdzW3N5bWJvbF0gLT0gc2hhcmVzCgogICAgZGVmIGdldF9uYXYoc2VsZiwgY3VycmVudF9wcmljZXM6IGRpY3QpIC0+IGZsb2F0OgogICAgICAgICIiIkNhbGN1bGF0ZSB0b3RhbCBOZXQgQXNzZXQgVmFsdWUuIiIiCiAgICAgICAgbmF2ID0gMC4wCiAgICAgICAgZm9yIHN5bWJvbCwgc2hhcmVzIGluIHNlbGYuaG9sZGluZ3MuaXRlbXMoKToKICAgICAgICAgICAgcHJpY2UgPSBjdXJyZW50X3ByaWNlcy5nZXQoc3ltYm9sLCAwLjApCiAgICAgICAgICAgIG5hdiArPSBzaGFyZXMgKiBwcmljZQogICAgICAgIHJldHVybiBuYXYKCiAgICBkZWYgZ2V0X2Fzc2V0X2FsbG9jYXRpb25zKHNlbGYsIGN1cnJlbnRfcHJpY2VzOiBkaWN0KSAtPiBkaWN0OgogICAgICAgICIiIkNhbGN1bGF0ZSBwZXJjZW50YWdlIHdlaWdodGluZyBvZiBlYWNoIGFzc2V0IGJhc2VkIG9uIGN1cnJlbnQgTkFWLiIiIgogICAgICAgIG5hdiA9IHNlbGYuZ2V0X25hdihjdXJyZW50X3ByaWNlcykKICAgICAgICBhbGxvY2F0aW9ucyA9IHt9CiAgICAgICAgaWYgbmF2ID09IDA6CiAgICAgICAgICAgIHJldHVybiBhbGxvY2F0aW9ucwogICAgICAgIGZvciBzeW1ib2wsIHNoYXJlcyBpbiBzZWxmLmhvbGRpbmdzLml0ZW1zKCk6CiAgICAgICAgICAgIHByaWNlID0gY3VycmVudF9wcmljZXMuZ2V0KHN5bWJvbCwgMC4wKQogICAgICAgICAgICB2YWx1ZSA9IHNoYXJlcyAqIHByaWNlCiAgICAgICAgICAgIGFsbG9jYXRpb25zW3N5bWJvbF0gPSAodmFsdWUgLyBuYXYpICogMTAwLjAKICAgICAgICByZXR1cm4gYWxsb2NhdGlvbnMKCiAgICBkZWYgZ2V0X3N1bW1hcnkoc2VsZiwgY3VycmVudF9wcmljZXM6IGRpY3QpIC0+IGRpY3Q6CiAgICAgICAgIiIiUmV0dXJuIGEgc3VtbWFyeSBjb250YWluaW5nIE5BViwgaG9sZGluZ3MsIGFuZCBhbGxvY2F0aW9ucy4iIiIKICAgICAgICByZXR1cm4gewogICAgICAgICAgICAibmF2Ijogc2VsZi5nZXRfbmF2KGN1cnJlbnRfcHJpY2VzKSwKICAgICAgICAgICAgImhvbGRpbmdzIjogZGljdChzZWxmLmhvbGRpbmdzKSwKICAgICAgICAgICAgImFsbG9jYXRpb25zIjogc2VsZi5nZXRfYXNzZXRfYWxsb2NhdGlvbnMoY3VycmVudF9wcmljZXMpCiAgICAgICAgfQo=
+import csv
+import io
+from collections import defaultdict
+
+class PortfolioTracker:
+    def __init__(self):
+        self.holdings = defaultdict(float)
+
+    def ingest_transactions(self, file_content: str):
+        reader = csv.DictReader(io.StringIO(file_content))
+        for row in reader:
+            if not row:
+                continue
+            symbol = row.get('symbol', '').strip().upper()
+            if not symbol:
+                continue
+            try:
+                shares = float(row.get('shares', 0))
+            except ValueError:
+                shares = 0.0
+            tx_type = row.get('type', '').strip().upper()
+            if tx_type == 'BUY':
+                self.holdings[symbol] += shares
+            elif tx_type == 'SELL':
+                self.holdings[symbol] -= shares
+
+    def get_nav(self, current_prices: dict) -> float:
+        nav = 0.0
+        for symbol, shares in self.holdings.items():
+            price = current_prices.get(symbol, 0.0)
+            nav += shares * price
+        return nav
+
+    def get_asset_allocations(self, current_prices: dict) -> dict:
+        nav = self.get_nav(current_prices)
+        allocations = {}
+        if nav == 0:
+            return allocations
+        for symbol, shares in self.holdings.items():
+            price = current_prices.get(symbol, 0.0)
+            value = shares * price
+            allocations[symbol] = (value / nav) * 100.0
+        return allocations
+
+    def get_summary(self, current_prices: dict) -> dict:
+        return {
+            'nav': self.get_nav(current_prices),
+            'holdings': dict(self.holdings),
+            'allocations': self.get_asset_allocations(current_prices)
+        }

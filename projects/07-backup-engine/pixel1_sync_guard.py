@@ -1,1 +1,64 @@
-aW1wb3J0IG9zCmltcG9ydCBoYXNobGliCmltcG9ydCBzdWJwcm9jZXNzCmltcG9ydCB0aW1lCgpjbGFzcyBQaXhlbFN5bmNHdWFyZDoKICAgIGRlZiBfX2luaXRfXyhzZWxmLCBzdGFnaW5nX2Rpcj0iL21udC9uYXMvcGhvdG9zX3N0YWdpbmciLCByZW1vdGVfZGlyPSIvc2RjYXJkL0RDSU0vTkFTX1N5bmMiKToKICAgICAgICBzZWxmLnN0YWdpbmdfZGlyID0gc3RhZ2luZ19kaXIKICAgICAgICBzZWxmLnJlbW90ZV9kaXIgPSByZW1vdGVfZGlyCgogICAgZGVmIGdldF9sb2NhbF9jaGVja3N1bShzZWxmLCBmaWxlX3BhdGgpOgogICAgICAgIGlmIG5vdCBvcy5wYXRoLmV4aXN0cyhmaWxlX3BhdGgpOgogICAgICAgICAgICByZXR1cm4gTm9uZQogICAgICAgIGhhc2hfbWQ1ID0gaGFzaGxpYi5tZDUoKQogICAgICAgIHRyeToKICAgICAgICAgICAgd2l0aCBvcGVuKGZpbGVfcGF0aCwgInJiIikgYXMgZjoKICAgICAgICAgICAgICAgIGZvciBjaHVuayBpbiBpdGVyKGxhbWJkYTogZi5yZWFkKDQwOTYpLCBiIiIpOgogICAgICAgICAgICAgICAgICAgIGhhc2hfbWQ1LnVwZGF0ZShjaHVuaykKICAgICAgICAgICAgcmV0dXJuIGhhc2hfbWQ1LmhleGRpZ2VzdCgpCiAgICAgICAgZXhjZXB0IEV4Y2VwdGlvbjoKICAgICAgICAgICAgcmV0dXJuIE5vbmUKCiAgICBkZWYgZ2V0X3JlbW90ZV9jaGVja3N1bShzZWxmLCBmaWxlX25hbWUpOgogICAgICAgIGltcG9ydCBzaGxleAogICAgICAgIHJlbW90ZV9wYXRoID0gZiJ7c2VsZi5yZW1vdGVfZGlyfS97ZmlsZV9uYW1lfSIKICAgICAgICBxdW90ZWRfcmVtb3RlX3BhdGggPSBzaGxleC5xdW90ZShyZW1vdGVfcGF0aCkKICAgICAgICB0cnk6CiAgICAgICAgICAgIHJlc3VsdCA9IHN1YnByb2Nlc3MucnVuKAogICAgICAgICAgICAgICAgWyJhZGIiLCAic2hlbGwiLCBmIm1kNXN1bSB7cXVvdGVkX3JlbW90ZV9wYXRofSJdLAogICAgICAgICAgICAgICAgY2FwdHVyZV9vdXRwdXQ9VHJ1ZSwKICAgICAgICAgICAgICAgIHRleHQ9VHJ1ZSwKICAgICAgICAgICAgICAgIGNoZWNrPVRydWUKICAgICAgICAgICAgKQogICAgICAgICAgICBvdXRwdXQgPSByZXN1bHQuc3Rkb3V0LnN0cmlwKCkKICAgICAgICAgICAgaWYgb3V0cHV0OgogICAgICAgICAgICAgICAgcmV0dXJuIG91dHB1dC5zcGxpdCgpWzBdCiAgICAgICAgICAgIHJldHVybiBOb25lCiAgICAgICAgZXhjZXB0IHN1YnByb2Nlc3MuQ2FsbGVkUHJvY2Vzc0Vycm9yOgogICAgICAgICAgICByZXR1cm4gTm9uZQoKICAgIGRlZiBzaG91bGRfcHVyZ2Uoc2VsZiwgZmlsZV9wYXRoLCBkYXlzPTMpOgogICAgICAgIGlmIG5vdCBvcy5wYXRoLmV4aXN0cyhmaWxlX3BhdGgpOgogICAgICAgICAgICByZXR1cm4gRmFsc2UKICAgICAgICBmaWxlX2FnZV9zZWNvbmRzID0gdGltZS50aW1lKCkgLSBvcy5wYXRoLmdldG10aW1lKGZpbGVfcGF0aCkKICAgICAgICByZXR1cm4gZmlsZV9hZ2Vfc2Vjb25kcyA+IChkYXlzICogMjQgKiA2MCAqIDYwKQoKICAgIGRlZiBydW4oc2VsZiwgZGF5cz0zKToKICAgICAgICBpZiBub3Qgb3MucGF0aC5leGlzdHMoc2VsZi5zdGFnaW5nX2Rpcik6CiAgICAgICAgICAgIHJldHVybgoKICAgICAgICBmb3IgZmlsZW5hbWUgaW4gb3MubGlzdGRpcihzZWxmLnN0YWdpbmdfZGlyKToKICAgICAgICAgICAgZmlsZV9wYXRoID0gb3MucGF0aC5qb2luKHNlbGYuc3RhZ2luZ19kaXIsIGZpbGVuYW1lKQoKICAgICAgICAgICAgaWYgbm90IG9zLnBhdGguaXNmaWxlKGZpbGVfcGF0aCk6CiAgICAgICAgICAgICAgICBjb250aW51ZQoKICAgICAgICAgICAgbG9jYWxfbWQ1ID0gc2VsZi5nZXRfbG9jYWxfY2hlY2tzdW0oZmlsZV9wYXRoKQogICAgICAgICAgICByZW1vdGVfbWQ1ID0gc2VsZi5nZXRfcmVtb3RlX2NoZWNrc3VtKGZpbGVuYW1lKQoKICAgICAgICAgICAgaWYgbG9jYWxfbWQ1IGFuZCByZW1vdGVfbWQ1IGFuZCBsb2NhbF9tZDUgPT0gcmVtb3RlX21kNToKICAgICAgICAgICAgICAgIGlmIHNlbGYuc2hvdWxkX3B1cmdlKGZpbGVfcGF0aCwgZGF5cz1kYXlzKToKICAgICAgICAgICAgICAgICAgICB0cnk6CiAgICAgICAgICAgICAgICAgICAgICAgIG9zLnJlbW92ZShmaWxlX3BhdGgpCiAgICAgICAgICAgICAgICAgICAgZXhjZXB0IEV4Y2VwdGlvbjoKICAgICAgICAgICAgICAgICAgICAgICAgcGFzcwoKCmlmIF9fbmFtZV9fID09ICJfX21haW5fXyI6CiAgICBndWFyZCA9IFBpeGVsU3luY0d1YXJkKCkKICAgIGd1YXJkLnJ1bigp
+import os
+import hashlib
+import subprocess
+import time
+
+class PixelSyncGuard:
+    def __init__(self, staging_dir="/mnt/nas/photos_staging", remote_dir="/sdcard/DCIM/NAS_Sync"):
+        self.staging_dir = staging_dir
+        self.remote_dir = remote_dir
+
+    def get_local_checksum(self, file_path):
+        if not os.path.exists(file_path):
+            return None
+        hash_md5 = hashlib.md5()
+        try:
+            with open(file_path, "rb") as f:
+                for chunk in iter(lambda: f.read(4096), b""):
+                    hash_md5.update(chunk)
+            return hash_md5.hexdigest()
+        except Exception:
+            return None
+
+    def get_remote_checksum(self, file_name):
+        import shlex
+        remote_path = f"{self.remote_dir}/{file_name}"
+        quoted_remote_path = shlex.quote(remote_path)
+        try:
+            result = subprocess.run(
+                ["adb", "shell", f"md5sum {quoted_remote_path}"],
+                capture_output=True,
+                text=True,
+                check=True
+            )
+            output = result.stdout.strip()
+            if output:
+                return output.split()[0]
+            return None
+        except Exception:
+            return None
+
+    def should_purge(self, file_path, days=3):
+        if not os.path.exists(file_path):
+            return False
+        file_age_seconds = time.time() - os.path.getmtime(file_path)
+        return file_age_seconds > (days * 24 * 60 * 60)
+
+    def run(self, days=3):
+        if not os.path.exists(self.staging_dir):
+            return
+
+        for filename in os.listdir(self.staging_dir):
+            file_path = os.path.join(self.staging_dir, filename)
+            if not os.path.isfile(file_path):
+                continue
+
+            local_md5 = self.get_local_checksum(file_path)
+            remote_md5 = self.get_remote_checksum(filename)
+
+            if local_md5 and remote_md5 and local_md5 == remote_md5:
+                if self.should_purge(file_path, days=days):
+                    try:
+                        os.remove(file_path)
+                    except Exception:
+                        pass

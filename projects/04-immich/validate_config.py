@@ -1,6 +1,9 @@
 import os
 from pathlib import Path
-from config import NAS_BINDINGS
+try:
+    from immich_config import NAS_BINDINGS
+except ImportError:
+    from config import NAS_BINDINGS
 
 def validate():
     all_valid = True
