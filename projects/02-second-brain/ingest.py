@@ -28,17 +28,10 @@ def read_text(file_path):
         return ""
 
 def chunk_text(text, chunk_size=1000, overlap=200):
-    if not text:
-        return []
-    if len(text) <= chunk_size:
-        return [text]
-    step = max(1, chunk_size - overlap) if overlap < chunk_size else 1
     chunks = []
     start = 0
+    step = max(1, chunk_size - overlap) if overlap < chunk_size else 1
     while start < len(text):
-        if start + chunk_size >= len(text):
-            chunks.append(text[start:])
-            break
         chunks.append(text[start:start + chunk_size])
         start += step
     return chunks
