@@ -4,10 +4,7 @@ import json
 import logging
 from pathlib import Path
 
-try:
-    from config import GRAPH_DB_PATH
-except (ImportError, AttributeError):
-    GRAPH_DB_PATH = Path(__file__).resolve().parent / "knowledge_graph.gml"
+GRAPH_DB_PATH = Path(__file__).resolve().parent / "knowledge_graph.gml"
 
 logger = logging.getLogger(__name__)
 
