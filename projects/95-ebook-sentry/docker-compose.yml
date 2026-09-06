@@ -1,0 +1,8 @@
+version: '3.8'
+services:
+  ebook-sentry:
+    build: .
+    container_name: ebook-sentry
+    mem_limit: 128m
+    command: python ebook_sentry.py --audit-now
+    restart: unless-stopped
