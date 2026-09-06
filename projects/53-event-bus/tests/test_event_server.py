@@ -1,7 +1,13 @@
 import pytest
 import json
 import asyncio
+import os
+import sys
+from pathlib import Path
 from fastapi.testclient import TestClient
+
+# Ensure project directory is in sys.path regardless of execution root
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 from event_server import app, engine, EventPayload
 
