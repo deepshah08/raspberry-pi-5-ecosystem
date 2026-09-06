@@ -1,0 +1,68 @@
+{
+  "title": "Homelab Overview",
+  "uid": "homelab-overview-01",
+  "panels": [
+    {
+      "title": "CPU Thermals (Intel N100 vs Pi 5)",
+      "type": "timeseries",
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 0 },
+      "targets": [
+        {
+          "expr": "node_hwmon_temp_celsius",
+          "refId": "A"
+        }
+      ]
+    },
+    {
+      "title": "NVMe IOPS & Disk Utilization",
+      "type": "timeseries",
+      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 0 },
+      "targets": [
+        {
+          "expr": "rate(node_disk_reads_completed_total[1m]) + rate(node_disk_writes_completed_total[1m])",
+          "refId": "A"
+        },
+        {
+          "expr": "rate(node_disk_io_time_seconds_total[1m])",
+          "refId": "B"
+        }
+      ]
+    },
+    {
+      "title": "RAM Allocation",
+      "type": "gauge",
+      "gridPos": { "h": 8, "w": 8, "x": 0, "y": 8 },
+      "targets": [
+        {
+          "expr": "100 - (node_memory_MemAvailable_bytes / node_memory_MemTotal_bytes * 100)",
+          "refId": "A"
+        }
+      ]
+    },
+    {
+      "title": "Pi-hole Query Rates",
+      "type": "timeseries",
+      "gridPos": { "h": 8, "w": 8, "x": 8, "y": 8 },
+      "targets": [
+        {
+          "expr": "rate(pihole_dns_queries_today[5m])",
+          "refId": "A"
+        }
+      ]
+    },
+    {
+      "title": "Container Health",
+      "type": "stat",
+      "gridPos": { "h": 8, "w": 8, "x": 16, "y": 8 },
+      "targets": [
+        {
+          "expr": "sum(up{job=\"cadvisor\"})",
+          "refId": "A"
+        }
+      ]
+    }
+  ],
+  "schemaVersion": 38,
+  "timezone": "browser",
+  "refresh": "15s"
+}
