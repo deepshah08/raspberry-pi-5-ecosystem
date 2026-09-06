@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  redis-sentry:
+    build: .
+    container_name: redis-sentry
+    restart: unless-stopped
+    ports:
+      - "9135:9135"
+    environment:
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+    deploy:
+      resources:
+        limits:
+          memory: 128M
