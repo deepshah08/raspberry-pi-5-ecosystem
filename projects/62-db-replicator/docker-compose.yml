@@ -1,0 +1,13 @@
+services:
+  db-replicator:
+    build: .
+    container_name: db-replicator
+    restart: unless-stopped
+    command: ["python", "replicator.py", "--source-db", "/source/db.sqlite", "--replica-dir", "/replica", "--interval", "10"]
+    deploy:
+      resources:
+        limits:
+          memory: 128M
+    volumes:
+      - /path/to/source:/source:ro
+      - /path/to/replica:/replica
