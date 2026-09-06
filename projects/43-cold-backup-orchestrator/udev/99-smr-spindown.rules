@@ -1,0 +1,6 @@
+# Udev rule enforcing 15-minute idle spindown timeout for Seagate Expansion USB drive.
+# Target Backup Drive: 8TB Seagate Expansion SMR External USB 3.0 HDD.
+# S indicates idle standby timeout. 15 minutes * 60 seconds / 5 seconds per unit = 180 (for some implementations) or value 180 = 15 minutes.
+# Wait, hdparm -S value for 15 minutes is 180 (180 * 5 seconds = 900 seconds = 15 minutes)
+
+ACTION=="add|change", KERNEL=="sd[a-z]", ATTRS{vendor}=="Seagate", ATTRS{model}=="Expansion*", RUN+="/sbin/hdparm -S 180 /dev/%k"
