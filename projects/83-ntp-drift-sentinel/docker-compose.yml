@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+  ntp-sentinel:
+    build: .
+    container_name: ntp_sentinel
+    ports:
+      - "9114:9114"
+    deploy:
+      resources:
+        limits:
+          memory: 128M
+    restart: unless-stopped
