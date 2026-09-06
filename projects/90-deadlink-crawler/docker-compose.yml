@@ -1,0 +1,11 @@
+version: '3.8'
+
+services:
+  crawler:
+    build: .
+    container_name: deadlink-crawler
+    deploy:
+      resources:
+        limits:
+          memory: 128M
+    command: ["python", "crawler_sentry.py", "--crawl-now", "--base-urls", "http://example.com", "--json"]
