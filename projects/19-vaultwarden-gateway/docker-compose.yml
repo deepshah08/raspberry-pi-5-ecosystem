@@ -1,0 +1,15 @@
+version: '3.8'
+services:
+  vaultwarden_sentinel:
+    build: .
+    container_name: vaultwarden_sentinel
+    ports:
+      - "9126:9126"
+    volumes:
+      - /volume2/docker/vaultwarden:/volume2/docker/vaultwarden:ro
+    deploy:
+      resources:
+        limits:
+          memory: 128M
+    command: ["python", "vault_sentinel.py", "--daemon"]
+    restart: unless-stopped
