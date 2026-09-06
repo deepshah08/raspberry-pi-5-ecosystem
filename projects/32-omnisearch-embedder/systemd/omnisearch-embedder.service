@@ -1,0 +1,17 @@
+[Unit]
+Description=OmniSearch Vision Embedding Worker
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/python3 /opt/omnisearch-embedder/embedder.py
+Restart=on-failure
+RestartSec=5
+
+# Hardware resource bounds to protect whole-home DNS/DHCP
+Nice=15
+MemoryMax=2G
+CPUQuota=75%
+
+[Install]
+WantedBy=multi-user.target
