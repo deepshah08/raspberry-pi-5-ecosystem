@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OmniSearch</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f9;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .search-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        .search-container input[type="text"] {
+            width: 300px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-right: 10px;
+        }
+        .search-container input[type="number"] {
+            width: 80px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-right: 10px;
+        }
+        .search-container button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .search-container button:hover {
+            background-color: #0056b3;
+        }
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+        }
+        .result-item {
+            background-color: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .result-item img {
+            max-width: 100%;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
+        .result-item h4 {
+            margin: 0 0 5px;
+        }
+        .result-item p {
+            margin: 0;
+            color: #555;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h1>OmniSearch</h1>
+        <p>Natural Language Media Search</p>
+    </div>
+
+    <div class="search-container">
+        <input type="text" id="searchInput" placeholder="Search for media..." onkeypress="handleKeyPress(event)">
+        <input type="number" id="limitInput" placeholder="Limit" value="10">
+        <input type="number" id="thresholdInput" placeholder="Threshold" value="0.5" step="0.1">
+        <button onclick="performSearch()">Search</button>
+    </div>
+
+    <div class="results-grid" id="resultsGrid">
+        <!-- Search results will be rendered here -->
+    </div>
+
+    <script>
+        function handleKeyPress(event) {
+            if (event.key === 'Enter') {
+                performSearch();
+            }
+        }
+
+        async function performSearch() {
+            const query = document.getElementById('searchInput').value;
+            const limit = document.getElementById('limitInput').value;
+            const threshold = document.getElementById('thresholdInput').value;
+
+            if (!query) {
+                alert('Please enter a search query.');
+                return;
+            }
+
+            const resultsGrid = document.getElementById('resultsGrid');
+            resultsGrid.innerHTML = '<p>Loading...</p>';
+
+            try {
+                const response = await fetch(`/search?q=${encodeURIComponent(query)}&limit=${limit}&threshold=${threshold}`);
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                const data = await response.json();
+
+                resultsGrid.innerHTML = '';
+
+                if (data.results && data.results.length > 0) {
+                    data.results.forEach(item => {
+                        const div = document.createElement('div');
+                        div.className = 'result-item';
+
+                        // Assuming payload has file_path, title, and confidence score
+                        const imageUrl = item.preview_url || 'https://via.placeholder.com/200?text=No+Preview';
+                        const title = item.title || 'Untitled';
+                        const score = item.score ? item.score.toFixed(2) : 'N/A';
+                        const path = item.file_path || '';
+
+                        div.innerHTML = `
+                            <img src="${imageUrl}" alt="${title}">
+                            <h4>${title}</h4>
+                            <p>Score: ${score}</p>
+                            <p style="font-size: 10px; word-break: break-all;">${path}</p>
+                        `;
+                        resultsGrid.appendChild(div);
+                    });
+                } else {
+                    resultsGrid.innerHTML = '<p>No results found.</p>';
+                }
+            } catch (error) {
+                console.error('Error fetching search results:', error);
+                resultsGrid.innerHTML = '<p>Error loading results.</p>';
+            }
+        }
+    </script>
+</body>
+</html>
