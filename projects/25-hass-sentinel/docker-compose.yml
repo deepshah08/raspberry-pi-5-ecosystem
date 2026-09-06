@@ -1,0 +1,16 @@
+version: "3.9"
+services:
+  hass-sentinel:
+    build: .
+    container_name: hass-sentinel
+    restart: unless-stopped
+    ports:
+      - "9131:9131"
+    environment:
+      - HASS_URL=${HASS_URL:-http://homeassistant:8123}
+      - HASS_TOKEN=${HASS_TOKEN}
+    command: ["python", "hass_sentinel.py", "--hass-url", "${HASS_URL:-http://homeassistant:8123}", "--token", "${HASS_TOKEN}"]
+    deploy:
+      resources:
+        limits:
+          memory: 128M
