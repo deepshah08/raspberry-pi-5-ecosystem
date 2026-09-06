@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  cert-renewer:
+    image: python:3.11-alpine
+    container_name: cert-renewer
+    volumes:
+      - ./cert_renewer.py:/app/cert_renewer.py:ro
+      - /opt/certs:/certs
+      - /opt/ca:/ca
+    working_dir: /app
+    entrypoint:
+      - /bin/sh
+      - -c
+      - "pip install cryptography && python cert_renewer.py --cert-file /certs/server.crt --ca-cert /ca/ca.crt --ca-key /ca/ca.key"
+    deploy:
+      resources:
+        limits:
+          memory: 128M
