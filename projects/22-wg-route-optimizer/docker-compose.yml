@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  wg-route-optimizer:
+    build: .
+    container_name: wg-route-optimizer
+    restart: unless-stopped
+    ports:
+      - "9129:9129"
+    deploy:
+      resources:
+        limits:
+          memory: 128M
+    command: ["python3", "route_optimizer.py"]
