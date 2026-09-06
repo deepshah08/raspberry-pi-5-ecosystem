@@ -4,7 +4,12 @@ import pytest
 from fastapi.testclient import TestClient
 from unittest.mock import patch, MagicMock
 
+# Remove any conflicting 'server' module before importing ours
+if "server" in sys.modules:
+    del sys.modules["server"]
+
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
+import server
 from server import app
 
 client = TestClient(app)
@@ -16,14 +21,14 @@ class MockPoint:
 
 @pytest.fixture
 def mock_qdrant_client():
-    with patch("server.get_qdrant_client") as mock:
+    with patch.object(server, "get_qdrant_client") as mock:
         mock_client = MagicMock()
         mock.return_value = mock_client
         yield mock_client
 
 @pytest.fixture
 def mock_get_text_embedding():
-    with patch("server.get_text_embedding") as mock:
+    with patch.object(server, "get_text_embedding") as mock:
         mock.return_value = [0.2] * 512
         yield mock
 

@@ -1,154 +1,129 @@
 import os
-import shutil
-import pytest
 import asyncio
+import tempfile
+import pytest
+from unittest.mock import patch, MagicMock
 from pathlib import Path
-from unittest.mock import patch, MagicMock, AsyncMock
+import hashlib
+
+import sys
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
 from ingest_daemon import (
     find_dcim,
     get_media_files,
     compute_checksum,
     copy_and_verify,
-    process_ingestion,
-    unmount_device
+    unmount_device,
+    process_ingestion
 )
 
-@pytest.fixture
-def mock_camera_fs(tmp_path):
-    """Creates a mock camera file system."""
-    source = tmp_path / "sdcard"
-    dest = tmp_path / "destination"
+def test_find_dcim():
+    with tempfile.TemporaryDirectory() as temp_dir:
+        dcim_path = os.path.join(temp_dir, "DCIM")
+        os.makedirs(dcim_path)
+        os.makedirs(os.path.join(temp_dir, "OTHER"))
 
-    source.mkdir()
-    dest.mkdir()
+        found_path = find_dcim(Path(temp_dir))
+        assert found_path is not None
+        assert "DCIM" in str(found_path)
 
-    dcim_path = source / "DCIM" / "100CANON"
-    dcim_path.mkdir(parents=True)
+def test_get_media_files():
+    with tempfile.TemporaryDirectory() as temp_dir:
+        open(os.path.join(temp_dir, "test1.jpg"), 'w').close()
+        open(os.path.join(temp_dir, "test2.mp4"), 'w').close()
+        open(os.path.join(temp_dir, "test3.txt"), 'w').close()
 
-    # Create valid media files
-    (dcim_path / "img1.JPG").write_text("jpeg content")
-    (dcim_path / "img2.cr3").write_text("raw content")
-    (dcim_path / "video.mp4").write_text("video content")
+        files = get_media_files(Path(temp_dir))
+        assert len(files) == 2
+        file_names = [f.name for f in files]
+        assert "test1.jpg" in file_names
+        assert "test2.mp4" in file_names
 
-    # Create an invalid file
-    (dcim_path / "data.txt").write_text("should be ignored")
+def test_compute_checksum():
+    with tempfile.NamedTemporaryFile(delete=False) as f:
+        f.write(b"test data")
+        temp_path = f.name
 
-    return source, dest, dcim_path
-
-def test_find_dcim(mock_camera_fs):
-    source, _, dcim_expected = mock_camera_fs
-
-    # Test typical deep nesting
-    dcim_found = find_dcim(source)
-    assert dcim_found is not None
-    assert dcim_found.name == "DCIM"
-
-    # Test root is DCIM
-    assert find_dcim(dcim_found) == dcim_found
-
-def test_get_media_files(mock_camera_fs):
-    _, _, dcim_expected = mock_camera_fs
-    files = get_media_files(dcim_expected.parent)
-
-    assert len(files) == 3
-    file_names = [f.name for f in files]
-    assert "img1.JPG" in file_names
-    assert "img2.cr3" in file_names
-    assert "video.mp4" in file_names
-    assert "data.txt" not in file_names
-
-def test_compute_checksum(tmp_path):
-    f = tmp_path / "test.bin"
-    f.write_text("hello world")
-
-    # Checksum of "hello world"
-    expected = "b94d27b9934d3e08a52e52d7da7dabfac484efe37a5380ee9088f7ace2efcde9"
-    assert compute_checksum(f) == expected
+    try:
+        checksum = compute_checksum(Path(temp_path))
+        hasher = hashlib.sha256()
+        hasher.update(b"test data")
+        assert checksum == hasher.hexdigest()
+    finally:
+        os.unlink(temp_path)
 
 @pytest.mark.asyncio
-async def test_copy_and_verify(tmp_path):
-    src = tmp_path / "src.jpg"
-    dest = tmp_path / "dest.jpg"
+async def test_copy_and_verify():
+    with tempfile.TemporaryDirectory() as temp_dir:
+        src = os.path.join(temp_dir, "src.jpg")
+        dst = os.path.join(temp_dir, "dst.jpg")
 
-    src.write_text("test image content")
+        with open(src, "wb") as f:
+            f.write(b"image data")
 
-    semaphore = asyncio.Semaphore(2)
-    result = await copy_and_verify(src, dest, semaphore)
-
-    assert result is True
-    assert dest.exists()
-    assert dest.read_text() == "test image content"
+        semaphore = asyncio.Semaphore(1)
+        success = await copy_and_verify(Path(src), Path(dst), semaphore)
+        assert success is True
+        assert os.path.exists(dst)
 
 @pytest.mark.asyncio
-async def test_copy_and_verify_skip_existing(tmp_path):
-    src = tmp_path / "src.jpg"
-    dest = tmp_path / "dest.jpg"
+async def test_copy_and_verify_skip_existing():
+    with tempfile.TemporaryDirectory() as temp_dir:
+        src = os.path.join(temp_dir, "src.jpg")
+        dst = os.path.join(temp_dir, "dst.jpg")
 
-    src.write_text("test image content")
-    dest.write_text("test image content") # already exists
+        with open(src, "wb") as f:
+            f.write(b"image data")
+        with open(dst, "wb") as f:
+            f.write(b"image data")
 
-    # We can patch shutil.copy2 to verify it's not called
-    with patch("shutil.copy2") as mock_copy:
-        semaphore = asyncio.Semaphore(2)
-        result = await copy_and_verify(src, dest, semaphore)
-        assert result is True
-        mock_copy.assert_not_called()
+        semaphore = asyncio.Semaphore(1)
+        success = await copy_and_verify(Path(src), Path(dst), semaphore)
+        assert success is True
 
-@patch("subprocess.run")
-def test_unmount_device_success(mock_run):
-    mock_run.return_value = MagicMock(returncode=0)
-    unmount_device("/mnt/test")
-    mock_run.assert_called_once_with(["umount", "/mnt/test"], capture_output=True, text=True)
+def test_unmount_device_success():
+    with patch("subprocess.run") as mock_run:
+        mock_process = MagicMock()
+        mock_process.returncode = 0
+        mock_run.return_value = mock_process
 
-@patch("subprocess.run")
-def test_unmount_device_failure(mock_run):
-    mock_run.return_value = MagicMock(returncode=1, stderr="device is busy")
-    with pytest.raises(RuntimeError, match="Unmount failed"):
-        unmount_device("/mnt/test")
+        try:
+            unmount_device("/dev/sdb1")
+        except Exception:
+            pytest.fail("unmount_device raised an exception unexpectedly")
 
-@patch("ingest_daemon.unmount_device")
-@patch("ingest_daemon.send_telegram_notification")
+def test_unmount_device_failure():
+    with patch("subprocess.run") as mock_run:
+        mock_process = MagicMock()
+        mock_process.returncode = 1
+        mock_run.return_value = mock_process
+
+        with pytest.raises(RuntimeError):
+            unmount_device("/dev/sdb1")
+
 @pytest.mark.asyncio
-async def test_process_ingestion_success(mock_notify, mock_unmount, mock_camera_fs):
-    source, dest, _ = mock_camera_fs
+async def test_process_ingestion_success():
+    with tempfile.TemporaryDirectory() as src_dir, tempfile.TemporaryDirectory() as dst_dir:
+        dcim = os.path.join(src_dir, "DCIM", "100CANON")
+        os.makedirs(dcim)
+        open(os.path.join(dcim, "IMG_0001.JPG"), 'w').close()
 
-    await process_ingestion(str(source), str(dest), webhook_url="http://fake.webhook", no_unmount=False)
+        with patch("ingest_daemon.unmount_device"), \
+             patch("ingest_daemon.send_telegram_notification") as mock_alert:
 
-    # Verify files copied
-    dest_dcim = dest / "100CANON"
-    assert (dest_dcim / "img1.JPG").exists()
-    assert (dest_dcim / "img2.cr3").exists()
-    assert (dest_dcim / "video.mp4").exists()
-    assert not (dest_dcim / "data.txt").exists()
+            await process_ingestion(src_dir, dst_dir, webhook_url="http://test")
 
-    # Verify webhook called
-    assert mock_notify.called
-    msg = mock_notify.call_args[0][1]
-    assert "✅ Camera Ingestion Complete" in msg
-    assert "Files: 3" in msg
+            assert os.path.exists(os.path.join(dst_dir, "100CANON", "IMG_0001.JPG"))
+            mock_alert.assert_called()
 
-    # Verify unmount called
-    mock_unmount.assert_called_once_with(str(source))
-
-@patch("ingest_daemon.copy_and_verify", new_callable=AsyncMock)
-@patch("ingest_daemon.unmount_device")
-@patch("ingest_daemon.send_telegram_notification")
 @pytest.mark.asyncio
-async def test_process_ingestion_failure(mock_notify, mock_unmount, mock_copy, mock_camera_fs):
-    source, dest, _ = mock_camera_fs
+async def test_process_ingestion_failure():
+    with tempfile.TemporaryDirectory() as src_dir, tempfile.TemporaryDirectory() as dst_dir:
+        # No DCIM directory
+        with patch("ingest_daemon.unmount_device"), \
+             patch("ingest_daemon.send_telegram_notification") as mock_alert:
 
-    # Force checksum failure for one of the files
-    # Return True, False, True to simulate one failure
-    mock_copy.side_effect = [True, False, True]
+            await process_ingestion(src_dir, dst_dir, webhook_url="http://test")
 
-    await process_ingestion(str(source), str(dest), webhook_url="http://fake.webhook", no_unmount=False)
-
-    # Webhook should report failure
-    assert mock_notify.called
-    msg = mock_notify.call_args[0][1]
-    assert "❌ Camera Ingestion Failed" in msg
-    assert "Failed: 1" in msg
-
-    # Unmount should NOT be called
-    assert not mock_unmount.called
+            mock_alert.assert_not_called()

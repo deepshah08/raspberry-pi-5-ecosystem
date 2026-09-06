@@ -10,6 +10,7 @@ uvicorn>=0.23.0
 httpx>=0.24.0
 zeroconf>=0.80.0
 requests>=2.31.0
+aiohttp>=3.9.0
 
 # Security & Crypto
 cryptography>=41.0.0
@@ -18,6 +19,12 @@ scapy>=2.5.0
 # Data & Automation
 pyyaml>=6.0.0
 vaderSentiment>=3.3.2
+networkx>=3.1
+pypdf>=3.17.0
+pytesseract>=0.3.10
+dnspython>=2.6.0
+prometheus_client>=0.20.0
+chromadb>=0.4.0
 
 # Scheduling & System Utils
 apscheduler>=3.10.0
