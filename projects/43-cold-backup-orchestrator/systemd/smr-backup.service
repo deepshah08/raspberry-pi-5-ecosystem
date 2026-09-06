@@ -1,0 +1,20 @@
+[Unit]
+Description=Cold Backup & SMR Spindown Orchestrator
+After=network.target local-fs.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/python3 /opt/cold-backup-orchestrator/backup_orchestrator.py --source /volume1/ --target /mnt/backup_drive/
+Environment="TELEGRAM_BOT_TOKEN=your_token_here"
+Environment="TELEGRAM_CHAT_ID=your_chat_id_here"
+
+# Hardening & Resource Limits
+Nice=19
+IOSchedulingClass=idle
+MemoryMax=512M
+# ProtectSystem=strict, PrivateTmp, RestrictNamespaces and others are removed
+# to prevent the service from running in a private mount namespace,
+# which would prevent unmount propagation to the host.
+
+[Install]
+WantedBy=multi-user.target
