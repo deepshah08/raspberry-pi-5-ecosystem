@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  llm-gateway:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: llm-gateway
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    environment:
+      - OLLAMA_BACKEND_URL=http://192.168.1.92:11434
+      - MAX_CONCURRENCY=1
+      - MAX_QUEUE_DEPTH=5
+      - REQUEST_TIMEOUT_SECONDS=60
+    deploy:
+      resources:
+        limits:
+          cpus: '2.0'
+          memory: 1024M
