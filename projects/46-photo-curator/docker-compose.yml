@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  photo-curator:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: photo-curator
+    environment:
+      - IMMICH_URL=http://immich:2283
+      - IMMICH_API_KEY=${IMMICH_API_KEY:-}
+    volumes:
+      - ./duplicates_review.json:/app/duplicates_review.json
+    command: ["sh", "-c", "while true; do python photo_curator.py --dry-run; sleep 86400; done"]
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: 512M
+    cap_add:
+      - SYS_NICE
+    # Nice=15 is typically set on host via systemd, but we can set resource limits in compose.
