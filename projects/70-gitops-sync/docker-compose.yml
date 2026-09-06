@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  drift-detector:
+    build: .
+    image: drift-detector:latest
+    container_name: gitops-sync-sentry
+    restart: unless-stopped
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - .:/app:ro
+    working_dir: /app
+    command: ["python", "drift_detector.py", "--check-now"]
+    deploy:
+      resources:
+        limits:
+          memory: 128M
