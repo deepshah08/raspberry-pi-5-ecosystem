@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  journal-aggregator:
+    image: debian:bookworm-slim
+    container_name: journal_aggregator
+    volumes:
+      - /var/log/journal:/var/log/journal:ro
+      - .:/app
+    working_dir: /app
+    # Need python3, systemd-journald (provides journalctl)
+    entrypoint: /bin/bash -c "apt-get update && apt-get install -y python3 systemd && journalctl -o json -f | python3 journal_aggregator.py"
+    deploy:
+      resources:
+        limits:
+          memory: 128M
