@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+  alert-silencer:
+    build: .
+    container_name: alert-silencer
+    ports:
+      - "9123:9123"
+    deploy:
+      resources:
+        limits:
+          memory: 128M
+    restart: unless-stopped
