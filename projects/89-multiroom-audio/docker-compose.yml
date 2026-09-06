@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  audio-sentry:
+    build: .
+    container_name: multiroom-audio-sentry
+    restart: unless-stopped
+    ports:
+      - "9117:9117"
+    deploy:
+      resources:
+        limits:
+          memory: 128M
+    command: ["python", "audio_sentry.py"]
