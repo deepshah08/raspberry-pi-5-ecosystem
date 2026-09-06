@@ -4,9 +4,26 @@ import pytest
 from fastapi.testclient import TestClient
 from unittest.mock import patch, MagicMock
 
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
-from server import app
+# IMPORTANT: Insert at index 0 and clear any pre-existing generic 'server' modules
+# from sys.modules to prevent shadowing from `08-trip-drop/server.py`
+import sys
+import os
 
+target_path = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+if target_path not in sys.path:
+    sys.path.insert(0, target_path)
+
+if 'server' in sys.modules:
+    del sys.modules['server']
+
+import importlib.util
+
+spec = importlib.util.spec_from_file_location("omnisearch_server", os.path.join(os.path.dirname(__file__), "..", "server.py"))
+omnisearch_server = importlib.util.module_from_spec(spec)
+sys.modules["omnisearch_server"] = omnisearch_server
+spec.loader.exec_module(omnisearch_server)
+
+app = omnisearch_server.app
 client = TestClient(app)
 
 class MockPoint:
@@ -16,14 +33,14 @@ class MockPoint:
 
 @pytest.fixture
 def mock_qdrant_client():
-    with patch("server.get_qdrant_client") as mock:
+    with patch.object(omnisearch_server, "get_qdrant_client", create=True) as mock:
         mock_client = MagicMock()
         mock.return_value = mock_client
         yield mock_client
 
 @pytest.fixture
 def mock_get_text_embedding():
-    with patch("server.get_text_embedding") as mock:
+    with patch.object(omnisearch_server, "get_text_embedding", create=True) as mock:
         mock.return_value = [0.2] * 512
         yield mock
 
