@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  ml-governor:
+    build: .
+    image: immich-ml-governor:latest
+    container_name: immich-ml-governor
+    ports:
+      - "9128:9128"
+    deploy:
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 128M
+    cap_add:
+      - SYS_NICE
+    command: ["nice", "-n", "15", "python", "ml_governor.py"]
+    restart: unless-stopped
+    environment:
+      - PYTHONUNBUFFERED=1
