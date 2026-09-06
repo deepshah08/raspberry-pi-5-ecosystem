@@ -1,0 +1,28 @@
+version: "3.9"
+services:
+  transcode_queue:
+    build: .
+    container_name: transcode_queue
+    restart: unless-stopped
+    devices:
+      - /dev/dri:/dev/dri  # Intel QSV hardware acceleration
+    volumes:
+      - /volume2/tmp_transcode:/tmp_transcode  # NVMe buffer
+      - /volume1/media:/media  # Read-write media directory
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+    environment:
+      - WATCH_DIR=/media
+      - TMP_DIR=/tmp_transcode
+      - CODEC=hevc
+      - CRF=23
+      - MIN_SIZE_MB=500
+    entrypoint: >
+      python3 transcode_daemon.py
+      --watch-dir /media
+      --tmp-dir /tmp_transcode
+      --codec hevc
+      --crf 23
+      --min-size-mb 500
