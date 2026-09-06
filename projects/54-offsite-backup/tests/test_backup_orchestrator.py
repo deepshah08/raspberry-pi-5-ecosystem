@@ -4,6 +4,7 @@ import sqlite3
 import subprocess
 import time
 from pathlib import Path
+sys.modules.pop('backup_orchestrator', None)
 from unittest.mock import MagicMock, call, patch
 
 import pytest
