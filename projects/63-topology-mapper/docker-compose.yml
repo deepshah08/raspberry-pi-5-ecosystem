@@ -1,0 +1,19 @@
+version: "3.8"
+
+services:
+  topology_mapper:
+    build: .
+    image: homelab/topology-mapper:latest
+    container_name: topology_mapper
+    restart: unless-stopped
+    network_mode: "host"
+    environment:
+      - TZ=UTC
+    volumes:
+      - ./data:/app/data
+    deploy:
+      resources:
+        limits:
+          memory: 128M
+    command: >
+      sh -c "while true; do python topology_mapper.py --scan-now --output /app/data; sleep 300; done"
