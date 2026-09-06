@@ -32,3 +32,4 @@ vaderSentiment>=3.3.2
 # Scheduling & System Utils
 apscheduler>=3.10.0
 watchdog>=3.0.0
+qdrant-client>=1.7.0
