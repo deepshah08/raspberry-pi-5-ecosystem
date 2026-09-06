@@ -1,4 +1,5 @@
 import os
+import sys
 import sqlite3
 import subprocess
 import time
@@ -7,6 +8,10 @@ from unittest.mock import MagicMock, call, patch
 
 import pytest
 import requests
+
+# Ensure project directory is in sys.path
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+
 from backup_orchestrator import RetentionManager, RcloneSyncRunner, SnapshotCoordinator, send_telegram_alert
 
 @pytest.fixture
@@ -61,7 +66,7 @@ def test_rclone_sync_runner(mock_run, temp_dirs):
     _, staging_dir = temp_dirs
     # Add dummy file to staging_dir for stats test
     (staging_dir / "dummy.txt").write_text("hello")
-    mock_run.return_value = MagicMock(stdout="success", stderr="Transferred:   	    3.585 MiB / 3.585 MiB, 100%, 0 B/s, ETA -", returncode=0)
+    mock_run.return_value = MagicMock(stdout="success", stderr="Transferred:   \t    3.585 MiB / 3.585 MiB, 100%, 0 B/s, ETA -\n", returncode=0)
 
     runner = RcloneSyncRunner("/fake/rclone.conf", "crypt:", "20M")
     result = runner.sync(staging_dir)
