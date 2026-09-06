@@ -1,0 +1,23 @@
+version: "3.8"
+
+services:
+  abs-plex-sync:
+    build: .
+    container_name: abs-plex-sync
+    restart: unless-stopped
+    environment:
+      - ABS_URL=http://localhost:13378
+      - ABS_TOKEN=your_abs_token
+      - PLEX_URL=http://localhost:32400
+      - PLEX_TOKEN=your_plex_token
+      - SYNC_INTERVAL=300
+    deploy:
+      resources:
+        limits:
+          memory: 256M
+    healthcheck:
+      test: ["CMD-SHELL", "ps -ef | grep python || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    command: ["python", "sync_daemon.py"]
