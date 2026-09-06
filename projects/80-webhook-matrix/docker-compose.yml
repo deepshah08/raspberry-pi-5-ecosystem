@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  webhook-matrix:
+    image: python:3.11-slim
+    container_name: webhook_matrix
+    volumes:
+      - ./webhook_matrix.py:/app/webhook_matrix.py
+    working_dir: /app
+    command: python webhook_matrix.py --listen-port 8095
+    ports:
+      - "8095:8095"
+    deploy:
+      resources:
+        limits:
+          memory: 128M
