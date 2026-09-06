@@ -28,3 +28,4 @@ qdrant-client>=1.7.0
 uptime-kuma-api>=0.2.0
 python-telegram-bot>=20.0
 cryptography>=41.0.0
+pytest-mock>=3.10.0

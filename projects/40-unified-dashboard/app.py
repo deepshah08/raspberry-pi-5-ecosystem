@@ -8,8 +8,10 @@ from fastapi.templating import Jinja2Templates
 app = FastAPI(title="Unified Search & Daily Briefing PWA Dashboard")
 
 # Mount static files and templates
-app.mount("/static", StaticFiles(directory="static"), name="static")
-templates = Jinja2Templates(directory="templates")
+import os
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+app.mount("/static", StaticFiles(directory=os.path.join(BASE_DIR, "static")), name="static")
+templates = Jinja2Templates(directory=os.path.join(BASE_DIR, "templates"))
 
 OMNISEARCH_URL = os.getenv("OMNISEARCH_URL", "http://localhost:8008")
 AUDIOBOOKSHELF_URL = os.getenv("AUDIOBOOKSHELF_URL", "http://localhost:13378")

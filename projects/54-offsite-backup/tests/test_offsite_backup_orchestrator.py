@@ -10,6 +10,7 @@ import pytest
 import requests
 
 # Ensure project directory is in sys.path
+sys.modules.pop('backup_orchestrator', None)
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 from backup_orchestrator import RetentionManager, RcloneSyncRunner, SnapshotCoordinator, send_telegram_alert

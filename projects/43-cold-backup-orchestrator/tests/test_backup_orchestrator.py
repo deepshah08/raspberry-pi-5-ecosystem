@@ -5,6 +5,10 @@ from unittest.mock import patch, MagicMock
 
 import pytest
 
+import sys
+import os
+sys.modules.pop('backup_orchestrator', None)
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from backup_orchestrator import BackupOrchestrator
 
 @pytest.fixture
