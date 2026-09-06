@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  transcriber:
+    build: .
+    image: abs-podcast-transcriber
+    container_name: abs-podcast-transcriber
+    volumes:
+      - /volume2/staging:/app/data
+    deploy:
+      resources:
+        limits:
+          memory: 256M
+          cpus: '0.50'
+    command: >
+      python podcast_transcriber.py
+      --feed-url "http://example.com/feed.xml"
+      --output-dir "/app/data"
+      --limit 5
