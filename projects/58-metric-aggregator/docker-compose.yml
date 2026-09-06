@@ -1,0 +1,10 @@
+version: '3.8'
+
+services:
+  metric-aggregator:
+    build: .
+    container_name: metric-aggregator
+    restart: unless-stopped
+    volumes:
+      - ./output:/app/output
+    command: ["python", "aggregator.py", "--output", "/app/output/targets.json", "--format", "json", "--interval", "60"]
