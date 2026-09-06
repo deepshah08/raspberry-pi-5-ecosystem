@@ -4,14 +4,14 @@ import os
 import shutil
 import tempfile
 import sys
-from pathlib import Path
+import sys, os; sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))); from pathlib import Path
 from unittest.mock import patch, MagicMock
 
 import pytest
 
 # Add projects/32-omnisearch-sampler to sys.path so we can import sampler
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-from sampler import MediaSampler
+import sys, os; sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))); from sampler import MediaSampler
 
 
 @pytest.fixture

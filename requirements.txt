@@ -27,3 +27,16 @@ qdrant-client>=1.7.0
 # Uptime Kuma & Notification Bridge
 uptime-kuma-api>=0.2.0
 python-telegram-bot>=20.0
+pillow>=10.0.0
+
+networkx>=3.1
+pypdf>=3.10.0
+mutagen>=1.47.0
+pytesseract>=0.3.10
+prometheus-client>=0.17.1
+numpy>=1.26.0
+aiohttp>=3.9.0
+pydantic>=2.0.0
+pytest-mock
+chromadb
+jinja2

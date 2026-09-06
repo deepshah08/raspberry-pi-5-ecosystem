@@ -6,7 +6,7 @@ from unittest.mock import patch, MagicMock
 import sys
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
-import receipt_watcher
+import sys, os; sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))); import receipt_watcher; import os
 
 def test_parse_receipt_data_all_fields():
     ocr_text = """Acme Corp
@@ -88,7 +88,7 @@ def test_archive_receipt(tmp_path, mock_archive_dir):
     # Archive it with a specific date
     new_path = receipt_watcher.archive_receipt(str(dummy_file), "2023-12-25", archive_base_dir=mock_archive_dir)
 
-    assert os.path.exists(new_path)
+    import os; assert os.path.exists(new_path)
     assert not os.path.exists(str(dummy_file))
     assert "2023-12" in new_path
     assert os.path.basename(new_path) == "receipt_test.jpg"
@@ -100,9 +100,9 @@ def test_archive_receipt_no_date(tmp_path, mock_archive_dir):
 
     new_path = receipt_watcher.archive_receipt(str(dummy_file), None, archive_base_dir=mock_archive_dir)
 
-    assert os.path.exists(new_path)
+    import os; assert os.path.exists(new_path)
     # Should use current YYYY-MM
-    from datetime import datetime
+    import sys, os; import os; sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))); from datetime import datetime
     current_yyyy_mm = datetime.now().strftime("%Y-%m")
     assert current_yyyy_mm in new_path
 

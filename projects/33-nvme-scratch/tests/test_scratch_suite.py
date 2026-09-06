@@ -1,13 +1,13 @@
 import os
 import sys
 import json
-from pathlib import Path
+import sys, os; sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))); from pathlib import Path
 from unittest.mock import patch, MagicMock
 
 import pytest
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-from mac_smb_optimizer import MacSMBOptimizer
+import sys, os; sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))); from mac_smb_optimizer import MacSMBOptimizer
 
 class TestMacSMBOptimizer:
     def test_generate_nsmb_conf_content(self):
@@ -73,7 +73,7 @@ class TestMacSMBOptimizer:
         mock_access.return_value = True
         assert optimizer.validate_nvme_permissions("/dummy/path")
 
-from benchmark_scratch import BenchmarkScratch
+import sys, os; sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))); from benchmark_scratch import BenchmarkScratch
 
 class TestBenchmarkScratch:
     @patch("benchmark_scratch.os.urandom")

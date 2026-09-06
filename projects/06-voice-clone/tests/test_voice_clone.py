@@ -5,7 +5,7 @@ import sys
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
-from voice_clone import synthesize_text
+import sys, os; sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))); from voice_clone import synthesize_text
 
 class TestVoiceClone(unittest.TestCase):
     def setUp(self):

@@ -8,8 +8,8 @@ import os
 # Add parent directory to sys.path to allow importing transcribe and indexer
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
-from transcribe import transcribe_audio
-from indexer import index_segments, query_segments
+import sys, os; sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))); from transcribe import transcribe_audio
+import sys, os; sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))); from indexer import index_segments, query_segments
 
 # --- Tests for transcribe.py ---
 

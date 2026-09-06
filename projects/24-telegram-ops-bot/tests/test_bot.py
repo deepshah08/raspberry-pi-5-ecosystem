@@ -1,13 +1,13 @@
 import pytest
 import os
 from unittest.mock import MagicMock, patch, AsyncMock, call
-from telegram import Update, User, Message, Chat
+import sys, os; sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))); from telegram import Update, User, Message, Chat
 from telegram.ext import Application
 import httpx
 
 import sys
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-from bot import start_command, search_command, briefing_command, status_command, ingest_command, create_app
+import sys, os; sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))); from bot import start_command, search_command, briefing_command, status_command, ingest_command, create_app
 
 @pytest.fixture
 def mock_context():

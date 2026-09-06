@@ -5,8 +5,8 @@ import sys
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
-from portfolio_tracker import PortfolioTracker
-from parse_statements import parse_statement_text, store_transactions
+import sys, os; sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))); from portfolio_tracker import PortfolioTracker
+import sys, os; sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))); from parse_statements import parse_statement_text, store_transactions
 
 class TestFinancialPipeline(unittest.TestCase):
     def test_portfolio_nav_and_allocations(self):

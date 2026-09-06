@@ -5,7 +5,7 @@ import sys
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
-from worker import JulesReviewWorker
+import sys, os; sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))); from worker import JulesReviewWorker
 
 class TestJulesReviewWorker(unittest.TestCase):
     def setUp(self):

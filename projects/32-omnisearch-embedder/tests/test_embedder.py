@@ -1,7 +1,7 @@
 import pytest
 import asyncio
 import numpy as np
-from embedder import OmniSearchEmbedder
+import sys, os; sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))); from embedder import OmniSearchEmbedder
 
 @pytest.fixture
 def embedder():

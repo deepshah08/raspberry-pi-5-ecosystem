@@ -4,9 +4,9 @@ import os
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
-from graph_engine import GraphEngine
-from agent import SocraticAgent
-from concept_extractor import ConceptExtractor
+import sys, os; sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))); from graph_engine import GraphEngine
+import sys, os; sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))); from agent import SocraticAgent
+import sys, os; sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))); from concept_extractor import ConceptExtractor
 
 class TestOfflineTutor(unittest.TestCase):
     def setUp(self):

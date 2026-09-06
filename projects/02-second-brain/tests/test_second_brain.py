@@ -1,14 +1,14 @@
 import os
 import tempfile
 import pytest
-from pypdf import PdfWriter
+import sys, os; sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))); from pypdf import PdfWriter
 
 # Add the parent directory to sys.path so we can import our modules
 import sys
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
-from ingest import ingest_directory, get_db_client, chunk_text
-from search import search
+import sys, os; sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))); from ingest import ingest_directory, get_db_client, chunk_text
+import sys, os; sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))); from search import search
 
 @pytest.fixture
 def temp_workspace():

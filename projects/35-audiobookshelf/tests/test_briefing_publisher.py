@@ -7,7 +7,7 @@ from unittest.mock import patch, MagicMock
 # Adjust import path if needed, assuming run from repo root
 import sys
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-from briefing_publisher import BriefingPublisher
+import sys, os; sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))); from briefing_publisher import BriefingPublisher
 
 @pytest.fixture
 def temp_env():

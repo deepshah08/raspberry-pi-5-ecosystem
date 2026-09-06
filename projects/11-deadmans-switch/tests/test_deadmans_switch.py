@@ -6,7 +6,7 @@ import sys
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
-from daemon import split_secret, recover_secret, DeadMansSwitch
+import sys, os; sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))); from daemon import split_secret, recover_secret, DeadMansSwitch
 
 class TestDeadMansSwitch(unittest.TestCase):
     def test_shamir_secret_sharing_math(self):

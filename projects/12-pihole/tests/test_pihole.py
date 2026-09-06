@@ -1,5 +1,5 @@
 import unittest
-from validate_pihole import check_dns_port, check_gravity_db
+import sys, os; sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))); from validate_pihole import check_dns_port, check_gravity_db
 
 class TestPiholeConfig(unittest.TestCase):
     def test_dns_validation_function(self):

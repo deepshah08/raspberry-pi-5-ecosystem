@@ -1,6 +1,6 @@
 import unittest
 import os
-from validate_n8n import validate_n8n_compose
+import sys, os; sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))); from validate_n8n import validate_n8n_compose
 
 class TestN8NConfig(unittest.TestCase):
     def test_validation(self):

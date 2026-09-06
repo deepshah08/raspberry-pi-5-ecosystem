@@ -1,8 +1,8 @@
 import os
 import json
 import pytest
-from unittest import mock
-from io import StringIO
+import sys, os; sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))); from unittest import mock
+import sys, os; sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))); from io import StringIO
 import sys
 
 # Add config directory to path to import radarr_apply_config
