@@ -1,0 +1,73 @@
+tiers:
+  1:
+    name: "Core Network / DNS"
+    services:
+      pihole:
+        host: "192.168.1.80"
+        compose_dir: "/opt/homelab/pihole"
+        healthcheck: "http://192.168.1.80/admin/api.php?summary"
+        grace_period: 10
+      unbound:
+        host: "192.168.1.80"
+        compose_dir: "/opt/homelab/pihole" # Assuming unbound is grouped or similar
+        healthcheck: null
+        grace_period: 5
+  2:
+    name: "Storage, DBs & Metrics"
+    services:
+      qdrant:
+        host: "192.168.1.80"
+        compose_dir: "/opt/homelab/qdrant"
+        healthcheck: "http://192.168.1.80:6333/readyz"
+        grace_period: 30
+      prometheus:
+        host: "192.168.1.92"
+        compose_dir: "/opt/homelab/observability"
+        healthcheck: "http://192.168.1.92:9090/-/healthy"
+        grace_period: 10
+      audiobookshelf:
+        host: "192.168.1.80"
+        compose_dir: "/opt/homelab/audiobookshelf"
+        healthcheck: "http://192.168.1.80:13378/ping"
+        grace_period: 15
+  3:
+    name: "APIs & Workers"
+    services:
+      omnisearch_api:
+        host: "192.168.1.92"
+        compose_dir: "/opt/homelab/omnisearch"
+        healthcheck: "http://192.168.1.92:8008/health"
+        grace_period: 5
+      searxng:
+        host: "192.168.1.80"
+        compose_dir: "/opt/homelab/searxng"
+        healthcheck: "http://192.168.1.80:8888/healthz"
+        grace_period: 10
+      llm_gateway:
+        host: "192.168.1.92"
+        compose_dir: "/opt/homelab/llm-gateway"
+        healthcheck: "http://192.168.1.92:8000/health"
+        grace_period: 15
+      ocr_watcher:
+        host: "192.168.1.80"
+        compose_dir: "/opt/homelab/ocr-watcher"
+        healthcheck: null
+        grace_period: 5
+  4:
+    name: "Frontends & Sentry"
+    services:
+      unified_dashboard:
+        host: "192.168.1.80"
+        compose_dir: "/opt/homelab/unified-dashboard"
+        healthcheck: "http://192.168.1.80:3030/health"
+        grace_period: 5
+      telegram_bot:
+        host: "192.168.1.92"
+        compose_dir: "/opt/homelab/telegram-bot"
+        healthcheck: "http://192.168.1.92:8081/health"
+        grace_period: 5
+      synthetic_canaries:
+        host: "192.168.1.92"
+        compose_dir: "/opt/homelab/synthetic-canaries"
+        healthcheck: "http://192.168.1.92:9115/metrics"
+        grace_period: 5
