@@ -1,0 +1,17 @@
+version: "3.8"
+
+services:
+  ups-sentinel:
+    build: .
+    container_name: ups_sentinel
+    restart: unless-stopped
+    ports:
+      - "9113:9113"
+    environment:
+      - NUT_HOST=127.0.0.1
+      - NUT_PORT=3493
+    deploy:
+      resources:
+        limits:
+          memory: 128M
+    command: ["python", "ups_sentinel.py", "--host", "${NUT_HOST:-127.0.0.1}", "--port", "${NUT_PORT:-3493}"]
