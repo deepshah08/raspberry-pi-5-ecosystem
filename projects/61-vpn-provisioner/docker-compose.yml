@@ -1,0 +1,20 @@
+version: "3.8"
+
+services:
+  vpn-provisioner:
+    build: .
+    container_name: homelab-vpn-provisioner
+    volumes:
+      - ./provisioner.py:/app/provisioner.py:ro
+      - vpn-clients-data:/etc/wireguard/clients
+    working_dir: /app
+    environment:
+      - WG_SERVER_PUBLIC_KEY=SERVER_PUBLIC_KEY_PLACEHOLDER
+      - WG_ENDPOINT=vpn.example.com:51820
+    deploy:
+      resources:
+        limits:
+          memory: 128M
+
+volumes:
+  vpn-clients-data:
