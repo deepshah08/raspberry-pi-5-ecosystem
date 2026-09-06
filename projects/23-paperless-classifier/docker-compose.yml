@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  document-classifier:
+    build: .
+    container_name: paperless-classifier
+    volumes:
+      - ./input:/app/input
+      - ./archive:/app/archive
+    ports:
+      - "9130:9130"
+    environment:
+      - PYTHONUNBUFFERED=1
+    command: ["python", "document_classifier.py", "--input-dir", "/app/input"]
+    deploy:
+      resources:
+        limits:
+          memory: 128M
