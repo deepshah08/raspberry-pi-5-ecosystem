@@ -1,0 +1,17 @@
+version: "3.8"
+
+services:
+  docker-gc:
+    image: python:3.12-alpine
+    container_name: docker-gc
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - .:/app
+    working_dir: /app
+    command: >
+      sh -c "pip install docker python-dateutil && python docker_gc.py --threshold-gb 10 --keep-days 7"
+    deploy:
+      resources:
+        limits:
+          memory: 128M
+    restart: "no" # Intended to be run periodically, not continuously, or could be replaced by a cron inside
