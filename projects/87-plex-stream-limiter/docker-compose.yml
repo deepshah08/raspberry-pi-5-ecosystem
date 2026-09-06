@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  stream-limiter:
+    build: .
+    container_name: plex-stream-limiter
+    environment:
+      - PLEX_URL=${PLEX_URL}
+      - PLEX_TOKEN=${PLEX_TOKEN}
+      - MAX_TRANSCODES=${MAX_TRANSCODES:-2}
+    ports:
+      - "9116:9116"
+    deploy:
+      resources:
+        limits:
+          memory: 128M
+    restart: unless-stopped
+    command: ["python", "stream_limiter.py", "--plex-url", "${PLEX_URL}", "--plex-token", "${PLEX_TOKEN}", "--max-transcodes", "${MAX_TRANSCODES:-2}"]
