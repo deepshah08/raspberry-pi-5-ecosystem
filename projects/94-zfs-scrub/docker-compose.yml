@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  zfs-orchestrator:
+    build: .
+    container_name: zfs-orchestrator
+    # We map port 9120 for Prometheus scraping
+    ports:
+      - "9120:9120"
+    # To run zpool commands, it typically needs privileged mode or specific capabilities
+    privileged: true
+    # Run in the background doing nothing but serving metrics and perhaps running cron
+    command: ["python3", "/app/zfs_orchestrator.py"]
+    deploy:
+      resources:
+        limits:
+          memory: 128M
+    volumes:
+      # Need access to the host devices and zfs tools depending on implementation
+      - /sbin/zpool:/sbin/zpool:ro
+      - /usr/sbin/smartctl:/usr/sbin/smartctl:ro
+      - /dev:/dev
