@@ -27,3 +27,4 @@ qdrant-client>=1.7.0
 # Uptime Kuma & Notification Bridge
 uptime-kuma-api>=0.2.0
 python-telegram-bot>=20.0
+requests
