@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  vault-rotator:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: vault-rotator:latest
+    container_name: vault-rotator
+    restart: unless-stopped
+    environment:
+      - VAULT_PASSWORD=${VAULT_PASSWORD}
+    deploy:
+      resources:
+        limits:
+          memory: 128M
+    tmpfs:
+      - /app/secrets:mode=1777,size=64M
+    volumes:
+      - ./vault.json:/app/vault.json
+    command: ["python", "vault_manager.py", "--vault-file", "/app/vault.json", "rotate", "immich", "--key", "IMMICH_API_KEY"]
