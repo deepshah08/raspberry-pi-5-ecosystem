@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  immich-video-transcoder:
+    build: .
+    container_name: immich-video-transcoder
+    restart: unless-stopped
+    volumes:
+      - /volume1/media:/media:ro
+      - /volume2/cache:/cache
+    devices:
+      - /dev/dri:/dev/dri
+    environment:
+      - TZ=UTC
+    mem_limit: 512m
