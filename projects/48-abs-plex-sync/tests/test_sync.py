@@ -1,18 +1,20 @@
 import pytest
 import sys
 import os
+from pathlib import Path
+from unittest.mock import patch, MagicMock
 
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 from sync_daemon import AudiobookshelfClient, PlexClient, ProgressHarmonizer
 
 @pytest.fixture
-def mock_abs_client(mocker):
+def mock_abs_client():
     client = AudiobookshelfClient("http://fake-abs", "fake_token")
     return client
 
 @pytest.fixture
-def mock_plex_client(mocker):
+def mock_plex_client():
     client = PlexClient("http://fake-plex", "fake_token")
     return client
 
@@ -51,16 +53,12 @@ def test_resolve_conflict_force_direction(harmonizer):
     direction = harmonizer.resolve_conflict(abs_progress, plex_progress)
     assert direction == "plex-to-abs"
 
-def test_sync_dry_run_no_exception(harmonizer, caplog, mocker):
+def test_sync_dry_run_no_exception(harmonizer, caplog):
     import logging
     caplog.set_level(logging.INFO)
     harmonizer.dry_run = True
 
-    # Mock network responses so it actually executes the loop
-    mocker.patch("requests.get", return_value=mocker.Mock(json=lambda: {"sessions": [{"id": "1", "title": "Dune", "progress": 100, "updatedAt": 100}]}))
-
-    # Also mock Plex API
-    plex_mock_response = mocker.Mock()
+    plex_mock_response = MagicMock()
     plex_mock_response.json.return_value = {"MediaContainer": {"Metadata": [{"ratingKey": "2", "title": "Dune (1965)", "viewOffset": 50, "updatedAt": 50}]}}
 
     def side_effect(url, **kwargs):
@@ -69,27 +67,31 @@ def test_sync_dry_run_no_exception(harmonizer, caplog, mocker):
         elif "status/sessions" in url:
             return plex_mock_response
         elif "/api/items/" in url and "/play" in url:
-            return mocker.Mock(json=lambda: {"progress": 100, "updatedAt": 100})
+            m = MagicMock()
+            m.json.return_value = {"progress": 100, "updatedAt": 100}
+            return m
         elif "/api/items/" in url:
-            return mocker.Mock(json=lambda: {"mediaProgress": {"isFinished": False}})
+            m = MagicMock()
+            m.json.return_value = {"mediaProgress": {"isFinished": False}}
+            return m
         elif "listening-sessions" in url:
-            return mocker.Mock(json=lambda: {"sessions": [{"id": "1", "title": "Dune", "progress": 100, "updatedAt": 100}]})
-        return mocker.Mock()
+            m = MagicMock()
+            m.json.return_value = {"sessions": [{"id": "1", "title": "Dune", "progress": 100, "updatedAt": 100}]}
+            return m
+        return MagicMock()
 
-    mocker.patch("requests.get", side_effect=side_effect)
-
-    harmonizer.sync()
+    with patch("requests.get", side_effect=side_effect):
+        harmonizer.sync()
 
     assert "Dry run enabled, no changes will be made." in caplog.text
     assert "Matched 'Dune' with 'Dune (1965)'" in caplog.text
     assert "Syncing Dune progress 100 to Plex" in caplog.text
 
-def test_sync_error_handling(harmonizer, caplog, mocker):
+def test_sync_error_handling(harmonizer, caplog):
     import logging
     caplog.set_level(logging.ERROR)
     import requests
 
-    mocker.patch("requests.get", side_effect=requests.RequestException("Network Error"))
-
-    harmonizer.sync()
+    with patch("requests.get", side_effect=requests.RequestException("Network Error")):
+        harmonizer.sync()
     assert "Failed to fetch sessions" in caplog.text
