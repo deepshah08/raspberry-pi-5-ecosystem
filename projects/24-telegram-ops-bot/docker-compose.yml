@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  bot:
+    image: python:3.12-slim
+    container_name: telegram-ops-bot
+    working_dir: /app
+    volumes:
+      - .:/app
+    environment:
+      - TELEGRAM_TOKEN=${TELEGRAM_TOKEN}
+      - TELEGRAM_ADMIN_IDS=${TELEGRAM_ADMIN_IDS}
+      - OMNISEARCH_URL=http://omnisearch:8008
+      - AUDIOBOOKSHELF_URL=http://audiobookshelf:13378
+      - UPTIME_KUMA_URL=http://uptime-kuma:3001
+      - KUMA_USER=${KUMA_USER:-admin}
+      - KUMA_PASS=${KUMA_PASS:-admin}
+      - CAMERA_INGEST_URL=http://camera-ingest:8080
+    command: >
+      bash -c "pip install -r requirements.txt && python bot.py"
+    healthcheck:
+      test: ["CMD-SHELL", "python -c \"import os, sys; sys.exit(0 if os.path.exists('/proc/1/cmdline') and b'bot.py' in open('/proc/1/cmdline', 'rb').read() else 1)\""]
+      interval: 30s
+      timeout: 10s
+      retries: 3
