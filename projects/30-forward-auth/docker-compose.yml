@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  forward-auth:
+    image: python:3.11-slim
+    container_name: forward-auth
+    working_dir: /app
+    volumes:
+      - ./forward_auth.py:/app/forward_auth.py:ro
+    command: ["python", "/app/forward_auth.py", "--secret-key", "change_me", "--port", "9136"]
+    ports:
+      - "9136:9136"
+    deploy:
+      resources:
+        limits:
+          memory: 128M
+    restart: unless-stopped
