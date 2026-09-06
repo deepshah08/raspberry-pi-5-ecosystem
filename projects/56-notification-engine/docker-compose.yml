@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+  notification-engine:
+    image: python:3.11-alpine
+    container_name: notification-engine
+    working_dir: /app
+    volumes:
+      - .:/app
+    environment:
+      - TELEGRAM_BOT_TOKEN=${TELEGRAM_BOT_TOKEN}
+      - TELEGRAM_CHAT_ID=${TELEGRAM_CHAT_ID}
+      - NTFY_TOPIC_URL=${NTFY_TOPIC_URL}
+    command: >
+      sh -c "pip install requests && python router.py --send-test --severity INFO"
+    deploy:
+      resources:
+        limits:
+          memory: 128M
+    healthcheck:
+      test: ["CMD-SHELL", "ps aux | grep '[r]outer.py'"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
