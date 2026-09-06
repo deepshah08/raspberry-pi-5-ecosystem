@@ -1,0 +1,21 @@
+version: "3.8"
+
+services:
+  proxy-sentry:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: homelab/proxy-sentry:latest
+    container_name: proxy-sentry
+    restart: unless-stopped
+    ports:
+      - "9119:9119"
+    environment:
+      - PYTHONUNBUFFERED=1
+    command: ["python", "proxy_sentry.py", "--config-path", "/etc/proxy-sentry/config.yml"]
+    volumes:
+      - ./config.yml:/etc/proxy-sentry/config.yml:ro
+    deploy:
+      resources:
+        limits:
+          memory: 128M
