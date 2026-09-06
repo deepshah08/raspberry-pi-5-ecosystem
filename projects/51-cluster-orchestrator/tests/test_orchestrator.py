@@ -1,9 +1,12 @@
 import pytest
 import argparse
 import sys
+import os
+from pathlib import Path
 from unittest.mock import patch, MagicMock
 
-# Allow absolute imports by modifying sys.path if necessary, but we run this using PYTHONPATH
+# Allow running from repository root or project folder
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 import orchestrator
 
 @pytest.fixture
