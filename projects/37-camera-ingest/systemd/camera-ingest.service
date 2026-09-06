@@ -1,0 +1,26 @@
+[Unit]
+Description=Zero-Touch SD Card Camera Ingest Daemon for %i
+After=local-fs.target
+BindsTo=dev-%i.device
+
+[Service]
+Type=oneshot
+# Adjust user as needed
+User=root
+Group=root
+
+# The block device is passed as %i from udev (e.g. sdb1)
+# Create a temporary mount point
+ExecStartPre=/usr/bin/mkdir -p /mnt/ingest-%i
+# Mount the block device to the temporary mount point
+ExecStartPre=/usr/bin/mount /dev/%i /mnt/ingest-%i
+
+# Run the ingestion daemon (paths and arguments may need adjustment for your specific environment)
+ExecStart=/usr/bin/python3 /opt/camera-ingest/ingest_daemon.py /mnt/ingest-%i /mnt/photos_staging
+
+# Since the python script handles unmounting on success, this cleanup only needs to handle dir removal.
+# If the daemon fails and aborts unmount, this might fail, which is okay as it alerts the user to check it.
+ExecStopPost=-/usr/bin/rmdir /mnt/ingest-%i
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,3 @@
+# Udev rule to trigger systemd ingestion service on block device add
+# We match block devices, specifically partitions (e.g., /dev/sdb1)
+ACTION=="add", SUBSYSTEM=="block", ENV{ID_FS_USAGE}=="filesystem", RUN+="/usr/bin/systemctl start --no-block camera-ingest@%k.service"
