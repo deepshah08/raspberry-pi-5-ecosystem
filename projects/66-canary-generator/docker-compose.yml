@@ -1,0 +1,13 @@
+version: "3.8"
+
+services:
+  canary-generator:
+    build: .
+    container_name: homelab-canary
+    ports:
+      - "9110:9110"
+    deploy:
+      resources:
+        limits:
+          memory: 128M
+    restart: unless-stopped
