@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+  master-dashboard:
+    build: .
+    container_name: master-dashboard
+    ports:
+      - "9125:9125"
+    deploy:
+      resources:
+        limits:
+          memory: 128M
+    restart: unless-stopped
