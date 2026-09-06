@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+  oom-watchdog:
+    build: .
+    container_name: oom-watchdog
+    restart: unless-stopped
+    mem_limit: 128m
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    environment:
+      - PYTHONUNBUFFERED=1
+    command: python oom_watchdog.py
