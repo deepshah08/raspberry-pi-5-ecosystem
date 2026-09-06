@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  cold-sync:
+    build: .
+    container_name: cold-sync
+    volumes:
+      - /volume1:/volume1:ro
+      - /mnt/usb:/mnt/usb
+    deploy:
+      resources:
+        limits:
+          memory: 128M
+    privileged: true
+    command: ["python", "/app/cold_sync.py", "--sync-now", "--source", "/volume1/data", "--target", "/mnt/usb/backup", "--bwlimit", "60M"]
