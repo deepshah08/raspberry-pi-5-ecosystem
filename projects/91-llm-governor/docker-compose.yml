@@ -1,0 +1,16 @@
+version: '3.8'
+services:
+  llm-governor:
+    build: .
+    container_name: llm-governor
+    ports:
+      - "9118:9118"
+      - "11435:11435"
+    environment:
+      - OLLAMA_URL=http://localhost:11434
+    deploy:
+      resources:
+        limits:
+          memory: 128M
+    restart: unless-stopped
+    command: python llm_governor.py
