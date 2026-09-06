@@ -1,0 +1,67 @@
+use_default_settings: true
+
+general:
+  debug: false
+  instance_name: "SearXNG Meta-Search Gateway"
+  privacypolicy_url: false
+  enable_metrics: false
+
+search:
+  safe_search: 0
+  autocomplete: ""
+  default_lang: ""
+  formats:
+    - html
+    - json
+
+server:
+  port: 8080
+  bind_address: "0.0.0.0"
+  secret_key: "searxngsecret"
+  base_url: false
+  image_proxy: true
+
+  # Rate limiting
+  limiter: false # Disable global rate limiting for local subnets handled below
+
+redis:
+  url: redis://redis:6379/0
+
+engines:
+  - name: google
+    engine: google
+    shortcut: go
+    disabled: false
+
+  - name: bing
+    engine: bing
+    shortcut: bi
+    disabled: false
+
+  - name: duckduckgo
+    engine: duckduckgo
+    shortcut: ddg
+    disabled: false
+
+  - name: reddit
+    engine: reddit
+    shortcut: re
+    disabled: false
+
+  - name: github
+    engine: github
+    shortcut: gh
+    disabled: false
+
+  - name: arxiv
+    engine: arxiv
+    shortcut: ax
+    disabled: false
+
+botdetection:
+  ip_lists:
+    pass_ip:
+      - 192.168.1.0/24
+      - 127.0.0.0/8
+      - 10.0.0.0/8
+      - 172.16.0.0/12
