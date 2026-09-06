@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  metadata-healer:
+    image: python:3.11-slim
+    container_name: metadata-healer
+    volumes:
+      - ./:/app
+    working_dir: /app
+    command: >
+      sh -c "pip install -r requirements.txt && python metadata_healer.py --audit-now --dry-run"
+    environment:
+      - RADARR_URL=http://radarr:7878
+      - SONARR_URL=http://sonarr:8989
+      - PLEX_URL=http://plex:32400
+    deploy:
+      resources:
+        limits:
+          memory: 128M
