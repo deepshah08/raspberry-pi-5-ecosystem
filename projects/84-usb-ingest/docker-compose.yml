@@ -1,0 +1,13 @@
+version: '3.8'
+services:
+  usb-ingest:
+    image: python:3.12-slim
+    container_name: usb-ingest
+    privileged: true
+    volumes:
+      - /dev:/dev
+      - /sys:/sys
+      - /volume2/staging:/volume2/staging
+      - ./usb_ingest.py:/app/usb_ingest.py:ro
+    mem_limit: 128m
+    command: ["python", "/app/usb_ingest.py", "--scan-now", "--staging-dir", "/volume2/staging", "--verify-hash"]
