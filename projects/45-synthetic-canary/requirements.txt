@@ -1,0 +1,6 @@
+httpx
+dnspython
+prometheus_client
+pytest
+pytest-mock
+pytest-asyncio
