@@ -1,0 +1,18 @@
+version: "3.8"
+
+services:
+  scrub_sentinel:
+    build: .
+    container_name: scrub_sentinel
+    restart: "no" # Runs on schedule or manually, so restart policy is 'no'
+    volumes:
+      - /volume1:/volume1:ro
+      - /volume2:/volume2:ro
+      - /dev:/dev:ro # Required for smartctl and zpool
+    working_dir: /app
+    privileged: true
+    deploy:
+      resources:
+        limits:
+          memory: 128M
+    command: ["python", "scrub_sentinel.py"]
