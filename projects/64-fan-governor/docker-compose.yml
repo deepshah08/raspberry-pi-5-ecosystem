@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  thermal-sentry:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: homelab-thermal-sentry
+    restart: unless-stopped
+    ports:
+      - "9108:9108"
+    volumes:
+      - /sys:/sys:ro
+    environment:
+      - TZ=UTC
