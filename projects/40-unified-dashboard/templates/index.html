@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unified Search & Daily Briefing PWA Dashboard</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <header>
+            <h1>Unified Dashboard</h1>
+            <div id="status-widget" class="status-widget">
+                <span class="status-dot"></span> Loading status...
+            </div>
+        </header>
+
+        <main>
+            <section class="search-section">
+                <h2>OmniSearch Gateway</h2>
+                <input type="text" id="search-input" placeholder="Search across all media...">
+                <div id="search-results" class="results-container"></div>
+            </section>
+
+            <section class="audio-section">
+                <h2>Morning Briefing</h2>
+                <div class="audio-player-container">
+                    <h3 id="briefing-title">Loading...</h3>
+                    <audio id="briefing-audio" controls></audio>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Lightbox for Image Previews -->
+    <div id="lightbox" class="lightbox">
+        <span class="close-lightbox">&times;</span>
+        <img class="lightbox-content" id="lightbox-img">
+    </div>
+
+    <script src="/static/app.js"></script>
+</body>
+</html>
