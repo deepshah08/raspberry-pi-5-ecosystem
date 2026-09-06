@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  code-server:
+    image: lscr.io/linuxserver/code-server:latest
+    container_name: code-server
+    environment:
+      - PUID=${UID:-1000}
+      - PGID=${GID:-1000}
+      - TZ=Etc/UTC
+      - PASSWORD=${PASSWORD:-password} # Optional
+      - HASH=${HASH:-} # Optional
+      - SUDO_PASSWORD=${SUDO_PASSWORD:-password} # Optional
+    volumes:
+      - ./workspace:/config/workspace
+      - ./git-configs:/config/.gitconfig
+      - ./extensions:/config/extensions
+    ports:
+      - 8443:8443
+    restart: unless-stopped
