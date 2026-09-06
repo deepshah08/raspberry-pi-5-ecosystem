@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  watchdog:
+    image: python:3.11-slim
+    container_name: tailscale-watchdog
+    command: ["python", "/app/tailscale_watchdog.py", "--check-now"]
+    volumes:
+      - ./tailscale_watchdog.py:/app/tailscale_watchdog.py:ro
+      - /var/run/tailscale/tailscaled.sock:/var/run/tailscale/tailscaled.sock:ro
+    deploy:
+      resources:
+        limits:
+          memory: 128M
