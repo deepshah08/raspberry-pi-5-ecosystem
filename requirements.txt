@@ -13,6 +13,8 @@ requests>=2.31.0
 
 # Security & Crypto
 cryptography>=41.0.0
+qrcode>=8.2
+Pillow>=12.3.0
 scapy>=2.5.0
 
 # Data & Automation
