@@ -1,0 +1,6 @@
+python-telegram-bot
+httpx
+uptime-kuma-api
+pytest
+pytest-mock
+pytest-asyncio
