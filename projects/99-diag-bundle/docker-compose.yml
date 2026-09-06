@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  diag_exporter:
+    build: .
+    image: diag_exporter:latest
+    container_name: diag_exporter
+    mem_limit: 128M
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /run/systemd/system:/run/systemd/system:ro
+      - /dev:/dev:ro
+      - ./output:/output
+    command: ["--collect-now", "--output-dir", "/output"]
+    network_mode: "host" # Needs host network to access local pihole and prometheus endpoints
