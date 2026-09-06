@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  ddns-sentinel:
+    build: .
+    container_name: ddns-sentinel
+    restart: unless-stopped
+    ports:
+      - "9121:9121"
+    environment:
+      - CLOUDFLARE_API_TOKEN=${CLOUDFLARE_API_TOKEN}
+      - DUCKDNS_TOKEN=${DUCKDNS_TOKEN}
+    command: ["--domain", "${DDNS_DOMAIN}", "--zone-id", "${CLOUDFLARE_ZONE_ID}"]
+    deploy:
+      resources:
+        limits:
+          memory: 128M
