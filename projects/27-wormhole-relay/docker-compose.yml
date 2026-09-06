@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+  wormhole_relay:
+    build: .
+    ports:
+      - "9133:9133"
+    deploy:
+      resources:
+        limits:
+          memory: 128M
+    volumes:
+      - /tmp/wormhole_staging:/tmp/wormhole_staging
