@@ -1,0 +1,2 @@
+class SearXNGClient:
+    pass
