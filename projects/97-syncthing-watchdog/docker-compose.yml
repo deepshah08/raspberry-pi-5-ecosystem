@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  watchdog:
+    build: .
+    image: homelab/syncthing-watchdog:latest
+    container_name: syncthing-watchdog
+    restart: unless-stopped
+    command: ["python", "syncthing_watchdog.py", "--api-url", "${SYNCTHING_API_URL:-http://syncthing:8384}", "--api-key", "${SYNCTHING_API_KEY}"]
+    ports:
+      - "9122:9122"
+    deploy:
+      resources:
+        limits:
+          memory: 128M
+    environment:
+      - SYNCTHING_API_URL=${SYNCTHING_API_URL:-http://syncthing:8384}
+      - SYNCTHING_API_KEY=${SYNCTHING_API_KEY}
