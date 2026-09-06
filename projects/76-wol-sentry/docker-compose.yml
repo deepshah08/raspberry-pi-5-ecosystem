@@ -1,0 +1,9 @@
+version: '3.8'
+services:
+  wol-sentry:
+    build: .
+    network_mode: "host"
+    mem_limit: 128m
+    volumes:
+      - ./targets.json:/app/targets.json
+    command: ["python", "wol_sentry.py", "--list"]
