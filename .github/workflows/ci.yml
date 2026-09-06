@@ -50,4 +50,3 @@ jobs:
           --ignore=projects/03-whisper-indexer \
           -v \
           --tb=short \
-          --timeout=60
