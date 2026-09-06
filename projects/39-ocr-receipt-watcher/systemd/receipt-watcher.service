@@ -1,0 +1,22 @@
+[Unit]
+Description=OCR Receipt Watcher Daemon
+After=network.target
+
+[Service]
+Type=simple
+User=jules
+Group=jules
+WorkingDirectory=/workspace/projects/39-ocr-receipt-watcher
+ExecStart=/usr/bin/python3 /workspace/projects/39-ocr-receipt-watcher/receipt_watcher.py
+Environment="RECEIPT_INCOMING_DIR=/tmp/receipts_incoming"
+Environment="RECEIPT_ARCHIVE_DIR=/tmp/receipts_archive"
+Environment="RECEIPT_DB_PATH=/workspace/projects/15-financial-pipeline/financial.db"
+
+# Sandboxing & Resource Limits
+Nice=15
+MemoryMax=512M
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target
