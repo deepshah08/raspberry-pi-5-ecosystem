@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  homepage-sentry:
+    build: .
+    image: homepage-sentry:latest
+    container_name: homepage-sentry
+    restart: unless-stopped
+    ports:
+      - "9127:9127"
+    deploy:
+      resources:
+        limits:
+          memory: 128M
