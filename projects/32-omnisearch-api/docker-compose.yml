@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  fastapi:
+    build: .
+    ports:
+      - "8008:8000"
+    environment:
+      - QDRANT_HOST=qdrant
+      - QDRANT_PORT=6333
+    volumes:
+      - .:/app
+      - ../32-omnisearch-qdrant:/32-omnisearch-qdrant
+    restart: unless-stopped
