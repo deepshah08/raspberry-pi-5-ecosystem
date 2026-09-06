@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  smart-sentinel:
+    build: .
+    container_name: smart-sentinel
+    restart: unless-stopped
+    working_dir: /app
+    volumes:
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+    devices:
+      - /dev/nvme0n1:/dev/nvme0n1:ro
+      - /dev/sda:/dev/sda:ro
+      - /dev/sdb:/dev/sdb:ro
+    ports:
+      - "9106:9106"
+    environment:
+      - TELEGRAM_BOT_TOKEN=${TELEGRAM_BOT_TOKEN}
+      - TELEGRAM_CHAT_ID=${TELEGRAM_CHAT_ID}
+    cap_add:
+      - SYS_RAWIO # Required for smartctl to access block devices directly
