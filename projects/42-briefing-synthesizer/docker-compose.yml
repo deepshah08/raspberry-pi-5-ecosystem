@@ -1,0 +1,19 @@
+version: "3.8"
+
+services:
+  synthesizer:
+    build: .
+    container_name: briefing-synthesizer
+    environment:
+      - ABS_URL=${ABS_URL:-http://192.168.1.80:13378}
+      - ABS_USER=${ABS_USER}
+      - ABS_PASS=${ABS_PASS}
+    volumes:
+      - ./data:/data
+    mem_limit: 512m
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "python", "-c", "import os; exit(0) if os.path.exists('/app/synthesizer_daemon.py') else exit(1)"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
