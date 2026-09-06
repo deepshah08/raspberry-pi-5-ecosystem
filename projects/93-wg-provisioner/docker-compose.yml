@@ -1,0 +1,11 @@
+version: '3.8'
+services:
+  wg-provisioner:
+    build: .
+    volumes:
+      - ./config:/etc/wireguard/clients
+    deploy:
+      resources:
+        limits:
+          memory: 128M
+    command: ["--list-peers"]
