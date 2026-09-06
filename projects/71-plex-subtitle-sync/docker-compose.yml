@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  subtitle-sync:
+    image: python:3.10-slim
+    container_name: plex-subtitle-sync
+    volumes:
+      - /path/to/media:/media
+      - .:/app
+    working_dir: /app
+    command: >
+      bash -c "pip install chardet && python subtitle_sync.py --path /media --clean-ads --convert-utf8"
+    deploy:
+      resources:
+        limits:
+          memory: 128M
