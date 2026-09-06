@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  mesh-sentinel:
+    build: .
+    container_name: mesh-sentinel
+    restart: unless-stopped
+    ports:
+      - "9132:9132"
+    environment:
+      - MQTT_BROKER=mqtt
+      - MQTT_PORT=1883
+    deploy:
+      resources:
+        limits:
+          memory: 128M
+    command: ["python", "mesh_sentinel.py", "--broker", "mqtt"]
