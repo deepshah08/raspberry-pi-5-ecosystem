@@ -1,0 +1,19 @@
+[Unit]
+Description=SLO Watchdog Auto-PR Self-Healing Hook
+After=network.target
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory=/opt/slo-auto-heal
+ExecStart=/usr/bin/python3 auto_heal_daemon.py
+Restart=on-failure
+RestartSec=5s
+
+# Resource Limits
+MemoryMax=512M
+CPUQuota=50%
+Nice=10
+
+[Install]
+WantedBy=multi-user.target
