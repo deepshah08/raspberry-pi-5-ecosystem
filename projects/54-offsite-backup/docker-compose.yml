@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  offsite-backup:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: offsite-backup
+    environment:
+      - TELEGRAM_BOT_TOKEN=${TELEGRAM_BOT_TOKEN:-}
+      - TELEGRAM_CHAT_ID=${TELEGRAM_CHAT_ID:-}
+    volumes:
+      # rclone config (read-only)
+      - /path/to/rclone.conf:/config/rclone.conf:ro
+      # local staging directory (NVMe)
+      - /volume2/backup_staging:/staging
+      # read-only source directories
+      - /volume1/appdata:/source/appdata:ro
+    command: >
+      python backup_orchestrator.py
+      --source-dir /source/appdata
+      --staging-dir /staging
+      --remote crypt-remote:
+      --bwlimit 15M
+      --retention-days 7
