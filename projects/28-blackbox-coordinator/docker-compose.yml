@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  probe_coordinator:
+    build: .
+    command: ["python", "probe_coordinator.py", "--output-config", "/data/blackbox_targets.yml"]
+    ports:
+      - "9134:9134"
+    volumes:
+      - ./data:/data
+    deploy:
+      resources:
+        limits:
+          memory: 128M
+    restart: unless-stopped
