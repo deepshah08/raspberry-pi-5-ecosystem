@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  wg-failover:
+    build: .
+    image: wg-failover:latest
+    container_name: wg-failover
+    network_mode: host
+    ports:
+      - "9112:9112"
+    cap_add:
+      - NET_ADMIN
+    command: ["python", "wg_failover.py", "--primary-ip", "192.168.1.80", "--secondary-ip", "192.168.1.92"]
+    deploy:
+      resources:
+        limits:
+          memory: 128M
+    restart: unless-stopped
