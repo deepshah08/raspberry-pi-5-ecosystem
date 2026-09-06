@@ -1,0 +1,18 @@
+version: '3.8'
+services:
+  synthetic-canary:
+    build: .
+    container_name: synthetic-canary
+    network_mode: host
+    ports:
+      - "9115:9115"
+    environment:
+      - TELEGRAM_BOT_TOKEN=${TELEGRAM_BOT_TOKEN:-""}
+      - TELEGRAM_CHAT_ID=${TELEGRAM_CHAT_ID:-""}
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 256M
+    restart: unless-stopped
+    command: ["python", "canary_runner.py", "--interval", "60"]
