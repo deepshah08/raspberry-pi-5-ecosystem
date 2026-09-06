@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  cert-sentry:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: cert-sentry
+    restart: unless-stopped
+    volumes:
+      - /path/to/host/certs:/certs
+    environment:
+      - PYTHONUNBUFFERED=1
+    command: ["python", "cert_sentry.py", "--generate-ca", "--run-loop", "--interval", "86400", "--endpoints", "proxy.home:443", "nas.home:8443"]
