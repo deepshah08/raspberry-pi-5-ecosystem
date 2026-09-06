@@ -9,7 +9,7 @@ services:
     volumes:
       - ./server.py:/app/server.py:ro
     command: >
-      bash -c "pip install mcp[cli] httpx && python3 server.py --transport sse --port 8090 --host 0.0.0.0"
+      bash -c "pip install \"mcp<2\" httpx && python3 server.py --transport sse --port 8090 --host 0.0.0.0"
     ports:
       - "8090:8090"
     mem_limit: 128m
