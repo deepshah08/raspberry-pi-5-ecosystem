@@ -1,0 +1,15 @@
+version: "3.8"
+
+services:
+  runner-manager:
+    image: python:3.10-slim
+    container_name: runner-manager
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - .:/app
+    working_dir: /app
+    command: ["tail", "-f", "/dev/null"] # Or proper entrypoint
+    deploy:
+      resources:
+        limits:
+          memory: 128M
