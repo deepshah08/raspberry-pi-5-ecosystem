@@ -1,0 +1,20 @@
+version: "3.8"
+
+services:
+  acl-sync:
+    build: .
+    image: homelab-acl-sync:latest
+    container_name: acl_sync
+    restart: always
+    volumes:
+      - /path/to/host/peers.json:/app/peers.json:ro
+      - /path/to/host/nginx-snippets:/output
+    command: >
+      sh -c "while true; do
+        python3 acl_sync.py --peers-file /app/peers.json --output /output/admin_allowlist.conf --reload-nginx;
+        sleep 60;
+      done"
+    deploy:
+      resources:
+        limits:
+          memory: 128M
