@@ -10,8 +10,8 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(
 logger = logging.getLogger(__name__)
 
 INCIDENTS_LOG_PATH = os.environ.get('INCIDENTS_LOG_PATH', '/var/log/slo_watchdog/incidents.jsonl')
-JULES_API_URL = os.environ.get('JULES_API_URL', 'http://localhost:8000/api/dispatch')
-JULES_API_KEY = os.environ.get('JULES_API_KEY', '')
+REMEDIATION_API_URL = os.environ.get('REMEDIATION_API_URL', os.environ.get('JULES_API_URL', 'http://localhost:8000/api/dispatch'))
+REMEDIATION_API_KEY = os.environ.get('REMEDIATION_API_KEY', os.environ.get('JULES_API_KEY', ''))
 TELEGRAM_BOT_TOKEN = os.environ.get('TELEGRAM_BOT_TOKEN', '')
 TELEGRAM_CHAT_ID = os.environ.get('TELEGRAM_CHAT_ID', '')
 
@@ -98,37 +98,37 @@ class AutoHealDaemon:
             "component": component
         }
 
-        jules_success = self._send_jules_request(payload)
+        success = self._send_remediation_request(payload)
 
-        if jules_success:
-            message = f"🚨 *Auto-Heal Triggered* 🚨\nIncident ID: `{incident_id}`\nComponent: `{component}`\nDescription: {description}\nStatus: Dispatched Jules Agent Session"
+        if success:
+            message = f"🚨 *Auto-Heal Triggered* 🚨\nIncident ID: `{incident_id}`\nComponent: `{component}`\nDescription: {description}\nStatus: Dispatched Remediation Agent Session"
             self._send_telegram_alert(message)
             return True
         else:
-            logger.error(f"Failed to dispatch Jules agent for incident {incident_id}")
+            logger.error(f"Failed to dispatch remediation agent for incident {incident_id}")
             return False
 
-    def _send_jules_request(self, payload: Dict[str, Any]) -> bool:
-        if not JULES_API_URL:
-            logger.warning("JULES_API_URL not configured.")
+    def _send_remediation_request(self, payload: Dict[str, Any]) -> bool:
+        if not REMEDIATION_API_URL:
+            logger.warning("REMEDIATION_API_URL not configured.")
             return False
 
         data = json.dumps(payload).encode('utf-8')
-        req = urllib.request.Request(JULES_API_URL, data=data, method='POST')
+        req = urllib.request.Request(REMEDIATION_API_URL, data=data, method='POST')
         req.add_header('Content-Type', 'application/json')
-        if JULES_API_KEY:
-            req.add_header('Authorization', f'Bearer {JULES_API_KEY}')
+        if REMEDIATION_API_KEY:
+            req.add_header('Authorization', f'Bearer {REMEDIATION_API_KEY}')
 
         try:
             with urllib.request.urlopen(req, timeout=10) as response:
                 if response.status in (200, 201, 202):
-                    logger.info("Successfully dispatched Jules request.")
+                    logger.info("Successfully dispatched remediation request.")
                     return True
                 else:
-                    logger.warning(f"Jules API returned status {response.status}")
+                    logger.warning(f"Remediation API returned status {response.status}")
                     return False
         except urllib.error.URLError as e:
-            logger.error(f"Failed to connect to Jules API: {e}")
+            logger.error(f"Failed to connect to remediation API: {e}")
             return False
 
     def _send_telegram_alert(self, message: str) -> bool:

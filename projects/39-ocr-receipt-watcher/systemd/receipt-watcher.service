@@ -4,8 +4,8 @@ After=network.target
 
 [Service]
 Type=simple
-User=jules
-Group=jules
+User=deepshah08
+Group=deepshah08
 WorkingDirectory=/workspace/projects/39-ocr-receipt-watcher
 ExecStart=/usr/bin/python3 /workspace/projects/39-ocr-receipt-watcher/receipt_watcher.py
 Environment="RECEIPT_INCOMING_DIR=/tmp/receipts_incoming"

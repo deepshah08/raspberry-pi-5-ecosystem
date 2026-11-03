@@ -80,4 +80,3 @@ class AgentReviewWorker:
         return {'verdict': verdict, 'body': body, 'pr_number': pr_number}
 
 # Alias for backwards compatibility
-JulesReviewWorker = AgentReviewWorker

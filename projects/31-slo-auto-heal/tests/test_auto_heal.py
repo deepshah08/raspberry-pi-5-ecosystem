@@ -5,7 +5,6 @@ from auto_heal_daemon import AutoHealDaemon
 
 @pytest.fixture
 def daemon():
-    # Use a dummy log path, we will mock the methods that use it
     d = AutoHealDaemon(log_path="/tmp/dummy_incidents.jsonl")
     return d
 
@@ -86,7 +85,7 @@ def test_evaluate_incident_duplicate(daemon):
         daemon.evaluate_incident(incident)
         mock_dispatch.assert_not_called()
 
-@patch('auto_heal_daemon.JULES_API_URL', 'http://dummy/api')
+@patch('auto_heal_daemon.REMEDIATION_API_URL', 'http://dummy/api')
 @patch('auto_heal_daemon.TELEGRAM_BOT_TOKEN', 'dummy_token')
 @patch('auto_heal_daemon.TELEGRAM_CHAT_ID', 'dummy_chat')
 def test_dispatch_remediation_success(daemon):
@@ -98,15 +97,14 @@ def test_dispatch_remediation_success(daemon):
         "component": "CoreDNS"
     }
 
-    with patch.object(daemon, '_send_jules_request', return_value=True) as mock_jules, \
+    with patch.object(daemon, '_send_remediation_request', return_value=True) as mock_remediation, \
          patch.object(daemon, '_send_telegram_alert', return_value=True) as mock_telegram:
 
         result = daemon.dispatch_remediation(incident)
         assert result is True
 
-        # Verify jules payload
-        mock_jules.assert_called_once()
-        payload = mock_jules.call_args[0][0]
+        mock_remediation.assert_called_once()
+        payload = mock_remediation.call_args[0][0]
         assert payload["incident_id"] == "inc-006"
         assert "DNS failure" in payload["prompt"]
         assert payload["component"] == "CoreDNS"
@@ -114,14 +112,14 @@ def test_dispatch_remediation_success(daemon):
         mock_telegram.assert_called_once()
 
 @patch('auto_heal_daemon.urllib.request.urlopen')
-def test_send_jules_request(mock_urlopen, daemon):
+def test_send_remediation_request(mock_urlopen, daemon):
     mock_response = MagicMock()
     mock_response.status = 200
     mock_response.__enter__.return_value = mock_response
     mock_urlopen.return_value = mock_response
 
-    with patch('auto_heal_daemon.JULES_API_URL', 'http://test'):
-        assert daemon._send_jules_request({"test": "data"}) is True
+    with patch('auto_heal_daemon.REMEDIATION_API_URL', 'http://test'):
+        assert daemon._send_remediation_request({"test": "data"}) is True
 
 @patch('auto_heal_daemon.urllib.request.urlopen')
 def test_send_telegram_alert(mock_urlopen, daemon):
