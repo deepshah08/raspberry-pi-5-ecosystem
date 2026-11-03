@@ -10,8 +10,8 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(
 logger = logging.getLogger(__name__)
 
 INCIDENTS_LOG_PATH = os.environ.get('INCIDENTS_LOG_PATH', '/var/log/slo_watchdog/incidents.jsonl')
-REMEDIATION_API_URL = os.environ.get('REMEDIATION_API_URL', os.environ.get('JULES_API_URL', 'http://localhost:8000/api/dispatch'))
-REMEDIATION_API_KEY = os.environ.get('REMEDIATION_API_KEY', os.environ.get('JULES_API_KEY', ''))
+REMEDIATION_API_URL = os.environ.get('REMEDIATION_API_URL', 'http://localhost:8000/api/dispatch'))
+REMEDIATION_API_KEY = os.environ.get('REMEDIATION_API_KEY', ''))
 TELEGRAM_BOT_TOKEN = os.environ.get('TELEGRAM_BOT_TOKEN', '')
 TELEGRAM_CHAT_ID = os.environ.get('TELEGRAM_CHAT_ID', '')
 
