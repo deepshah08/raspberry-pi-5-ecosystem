@@ -5,11 +5,11 @@ import sys
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
-from worker import JulesReviewWorker
+from worker import AgentReviewWorker
 
-class TestJulesReviewWorker(unittest.TestCase):
+class TestAgentReviewWorker(unittest.TestCase):
     def setUp(self):
-        self.worker = JulesReviewWorker(repositories=["deepshah08/raspberry-pi-5-ecosystem"])
+        self.worker = AgentReviewWorker(repositories=["deepshah08/raspberry-pi-5-ecosystem"])
         self.tmp_dir = tempfile.TemporaryDirectory()
 
     def tearDown(self):

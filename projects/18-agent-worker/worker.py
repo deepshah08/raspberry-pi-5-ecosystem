@@ -7,9 +7,9 @@ import logging
 from worker_config import REPOSITORIES, WORKSPACE_DIR, POLL_INTERVAL_SECONDS
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
-logger = logging.getLogger('JulesAgentWorker')
+logger = logging.getLogger('AgentReviewWorker')
 
-class JulesReviewWorker:
+class AgentReviewWorker:
     def __init__(self, repositories=None):
         self.repositories = repositories or REPOSITORIES
         self.workspace = WORKSPACE_DIR
@@ -60,7 +60,7 @@ class JulesReviewWorker:
         if test_passed and not syntax_issues:
             verdict = 'APPROVE'
             body = (
-                '### ✅ Jules Automated Code Review: LGTM\n\n'
+                '### ✅ Automated Code Review: LGTM\n\n'
                 + f'**PR #{pr_number}**: {pr_title}\n'
                 + '- Automated test suite passed successfully on Raspberry Pi 5 ARM64 worker.\n'
                 + '- Zero AST/Syntax errors detected.\n\n'
@@ -71,10 +71,13 @@ class JulesReviewWorker:
             issue_list = '\n'.join([f'- {iss}' for iss in syntax_issues])
             log_snippet = output_log[-1000:] if output_log else 'No test output'
             body = (
-                '### ⚠️ Jules Automated Code Review: Changes Requested\n\n'
+                '### ⚠️ Automated Code Review: Changes Requested\n\n'
                 + f'**PR #{pr_number}**: {pr_title}\n\n'
                 + f'#### Issues Detected:\n{issue_list}\n\n'
                 + f'#### Test Output Log:\n```text\n{log_snippet}\n```'
             )
             
         return {'verdict': verdict, 'body': body, 'pr_number': pr_number}
+
+# Alias for backwards compatibility
+JulesReviewWorker = AgentReviewWorker

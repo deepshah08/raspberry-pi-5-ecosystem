@@ -1,5 +1,5 @@
 [Unit]
-Description=Headless Jules Agent Review Worker
+Description=Headless Agent Review Worker
 After=network.target
 
 [Service]
